@@ -1,7 +1,6 @@
 # below is defined my custom list
 venv/
-index.html
-about.html
+dev/
 
 
 # below are common python ignore lists
