@@ -1,0 +1,173 @@
+
+
+
+* { margin: 0; padding: 0; line-height: 1.5;  font-style: normal; font-weight: normal;  }
+body {font: normal 12px Arial, Helvetica, sans-serif; border-top: none; }
+
+h1, h2, h3, h4, h5, h6, table { clear: both; }
+
+
+p {margin: 0 0 1em 0; }
+
+a, a:visited { color: #0078ae; border-bottom: 1px dotted #dae7f2; text-decoration: none; }
+	a:hover, a:focus { color: #75b2d5; }
+
+ul {margin: .5em 0;}
+/*ul li {list-style: none; background: transparent url(../img/list-marker.gif) no-repeat left 0.6em; padding-left: 8px; margin-bottom: 0.8em; margin-left: 0 !important }
+	#secondary ul li, #tertiary ul li {margin-bottom: .5em}
+*/
+
+
+/*-------------------------------------------
+   LAYOUT
+-------------------------------------------*/
+
+#wrap { background: #fff; margin: 1.5em auto 1.5em auto; width: 960px; position: relative; }
+#header {width: 100%; margin: 0; float: left; padding:24px 0 0 0; clear: both;}
+/*	#header h1 { float:left; background: url(static/images/tr_logo_40.gif) no-repeat top right; height: 60px; width: 935px; min-width: 930px; } */
+
+
+#search	{ background: #f1f1f1; width: 250px; height: 32px; float:right;   }
+		#search * { vertical-align: middle; }
+		#search label { position: absolute; left: -9999px; }
+		#search p { padding: 0; margin: 6px 0 0 0; *margin: 5px 0 0 0}
+			#search p input {}
+			#search p #searchfield { width: 132px; margin: 0 11px 0 20px; }
+
+#nav { float:left; width: 100%; height: 32px; border-bottom:1px solid #e1e2e3; border-top:1px solid #e1e2e3;}
+
+
+
+/* -------------------------- Navigation ---------------*/
+#navlang
+{
+
+height:20px;
+padding:0px;
+margin: 0px; 
+
+}
+#navlist 
+{
+margin:0px;
+
+}
+#navlist li
+{
+margin:0px;
+display: inline;
+padding-top:2px;
+padding-bottom: 0px;
+padding-left: 20px;
+list-style-type: none ;
+background-repeat: no-repeat;
+
+}
+
+#navlist a
+{
+padding-left: 0px;
+padding-bottom: -10px;
+font-weight: bold;
+text-decoration: none;
+
+}
+#navlist #active
+{
+float: right;
+margin-right: 10px;
+}
+#navlist #inactive
+{
+float: right;
+margin-right: 10px;
+}
+#navlist #inactive1
+{
+float: right;
+margin-right: 10px;
+}
+#navlist a:link, #navlist a:visited
+{
+padding-left: 20px;
+/* color: #996666; */
+/* background: url(static/images/arrowbullet.gif); */
+background-position: 0 -28px;
+background-repeat: no-repeat;
+}
+
+#navlist a:hover
+{
+/* color: #530; */
+padding-left: 20px;
+/* background: url(static/images/arrowbullet.gif); */
+background-repeat: no-repeat;
+background-position: 0 -14px;  
+/*border-left: 5px solid;
+border-image-slice: 1;
+border-image-source: linear-gradient(90deg, rgba(105,78,214,1) 0%, rgba(193,55,162,1) 90%);*/
+}
+
+
+				
+/*-- container for the text area of page (main + secondary + tertiary --*/				
+	#content { 
+	float: left; clear:both; 
+	margin: 30px 0 0 0 ;
+	 width: 100%;height:900px;
+	/*  background: transparent url(../img/postit.png) no-repeat 150px 150px; */
+	 }
+
+
+
+.clearfix:after { content: "."; display: inline; height: 0.1px; clear: both; font-size: 0; visibility: visible; }
+.clearfix { display: inline-table; }
+/* \*/
+* html .clearfix { height: 1%; }
+.clearfix { display:block; }
+/* */
+
+
+
+
+/*-------------------------------------------
+    MENUBAR
+-------------------------------------------*/
+
+#menubar {width: 680px; float: left; padding: 2px 0; margin: 8px 0 0 6px; list-style: none;  padding: 0;}
+#menubar li {display: inline; list-style-type: none; margin: 0; background: none; padding: 0;}
+#menubar li a, #navlist li a.last  {color: #828282; text-decoration: none; border-bottom: none; text-transform: uppercase; 
+font-weight: bold; font-size: 12px; padding: 0 12px; }
+	#menubar li a.last {border-right: none;}
+#menubar li a:hover, #navlist li a.last:hover  {color: #333;}
+
+
+/*-----  Nav list active state based on page class ----- */
+
+	body.create a#create, body.manage a#manage, body.training a#training,
+	body.history a#history, body.reports a#reports, body.help a#help  {color: #525252;}
+	
+
+
+
+/* hide from IE mac \*/
+#menubar li {position: static; width: auto;}
+
+
+
+
+
+/*-------------------------------------------
+    FOOTER
+-------------------------------------------*/
+
+#footer-wrap { clear: both; position: relative; top: 0; width:960px; background-color: #fff; padding:0;}
+#footer {float: left; width: 100%; margin: 3em 0 0 0; background: #eeefef; clear: both; height: 24px; padding-top: 8px}
+#footer * { color: #97969a; display: inline; font-size: 11px; text-transform: uppercase; }
+	#footer address { padding-left: 21px; margin-right: 30px; }
+#footer ul {list-style: none; }
+	#footer li {background: none; margin: 0; padding: 0;}
+#footer li a { color: #807f83; border-bottom: 1px solid #e3e5e6; margin-right: 2em;}
+#footer li a:hover, #footer li a:focus { color: #ff9100;}
+
+
