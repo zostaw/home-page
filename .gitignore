@@ -1,4 +1,11 @@
+# below is defined my custom list
 venv/
+index.html
+about.html
+
+
+# below are common python ignore lists
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -57,3 +64,4 @@ docs/_build/
 
 # PyBuilder
 target/
+
