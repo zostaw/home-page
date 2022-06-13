@@ -7,9 +7,8 @@ INSTALLATION
 
 You must have installed at least python 3.6
 
-1. create your home-page directory
-mkdir ~/home-page
-cd ~/home-page
+1. go to parent directory for your project. In example, home directory is used (new directory "home-page" will be created inside).
+cd ~/
 
 2. initiate local repo and load this project
 git clone zostaw@https://github.com/zostaw/home-page.git
