@@ -23,12 +23,54 @@
  *
  */
 
+:root {
+/* pallete explanation */
+  /* complimentary main colors */
+  --cool-coral: #B8474D;
+  --green-light: #47B8B2;
+  /* for light elements, text */
+  --very-light-coral: #f5e1e0;
+  /* alternative warmer complimentary main colors */
+  --warm-coral: #C2443D;
+  --mint-green: #3DBBC2;
+  /*dark colors - backgrounds*/
+  --dark-dark-green: #0B1C1B;
+  --mid-dark-green: #1C0B0C;
+  --light-dark-green: #19413E;
+
+  --black: #000000;
+  --blue: #1e90ff;
+  --white: #ffffff;
+
+/* the used colors */
+  --light-text: #f5e1e0;
+  /*
+  --nav-bg: #B8474D;
+  */
+  --nav-bg: #AC6253;
+  /*
+  --back-bg: #1C0B0C;
+  */
+  --back-bg: #19413E;
+  --dark-bg: #0B1C1B;
+  --main-bg: #19413E;
+  --flashy-bg: #47B8B2;
+  --divider: #000000;
+/*
+  --light-text: #f5e1e0;
+  --nav-bg: #19413E;
+  --dark-bg: #0B1C1B;
+  --back-bg: #1C0B0C;
+  --main-bg: #B84740;
+  --flashy-bg: #47B8B2;
+  --divider: #000000;
+  */
+}
+
 html,
 body {
-    color: #f5e1e0;
-    background: #1C0B0C;
-    /*background: #0b1c1b;*/
-    /*background: #47B8B2;*/
+    color: var(--light-text);
+    background: var(--back-bg);
     /*padding: 5px;*/
     padding:2px;
     font-family: Georgia, Helvetica, sans-serif; 
@@ -41,16 +83,20 @@ body {
 
 
 /* removed - it was another field above menu */
+
 .top-container {
-    background: #f5e1e0;
-    padding:5px;
+    background: var(--light-text);
+    padding:1px;
     /*border-bottom:2px solid #0f0f0f;*/
 }
+
 /* menu */
 .nav {
-    background: #B8474D;
-    padding:5px;
-    /*border-bottom:2px solid #0f0f0f;*/
+    background: var(--nav-bg);
+    box-shadow: 2px 2px var(--black);
+    margin: auto;
+    width: 100%;
+    padding:1px;
 }
 
 
@@ -59,10 +105,10 @@ body {
     margin: auto;
     width: 50%;
     height: 100%;
-    background: #19413E;
-    /*background: #0b1c1b;*/
+    /*
+    background: var(--main-bg);
+    */
     padding: 25px;
-    #margin: 25px;
     /*border-bottom:2px solid #0f0f0f;*/
 }
 
@@ -73,23 +119,22 @@ body {
 /* navigation */
 a {
     text-decoration: none;
-    /* color: rgb(65,65,65); */
-    background-color: #B8474D;
-    color: #47B8B2;
+    background-color: var(--nav-bg);
+    color: var(--flashy-bg);
     /*font-size: 1.5em;
     font-weight: bold;*/
 }
 
 a:hover { 
-    /*background-color : #47B8B2; */
-    background-color: #B8474D;
-    color: #B8474D;}
+    background-color: var(--nav-bg);
+    color: var(--nav-bg);}
 
 /*a-nav-item is really just the text of URL */
 .a-nav-item{
     text-decoration: none;
-    color: #19413E;
-    font-size: 1.5em;
+    color: var(--main-bg);
+    font-size: 1em;
+    /*font-size: 1.5em;*/
     font-weight: bold;
 }
 
@@ -97,7 +142,7 @@ a:hover {
     /* "blue" 
     color : #694ed6;
     greyinsh from pallete: */
-    color: #19413E;
+    color: var(--main-bg);
 }
 
 /* btn-nav is the border of URL */
@@ -110,21 +155,21 @@ a:hover {
 }
 .btn-nav:hover{
     /*background: #eee;*/
-    background: #47B8B2;
+    background: var(--flashy-bg);
 }
 
 /* navigation - end */
 
 .bottom-container {
-    background: #0b1c1b;
-    border-top:2px solid #f5e1e0;
+    background: var(--dark-bg);
+    border-top:2px solid var(--light-text);
     position:fixed;
     bottom:0;
 }
 
 .footer-container {
     text-align: center;
-    background: #47B8B2;
+    background: var(--flashy-bg);
     position:fixed;
     bottom:0;
     height:25px;
@@ -133,11 +178,11 @@ a:hover {
 
 .divider{
     clear:both;
-    background: #C2443D;
+    background: var(--divider);
 }
 .homepage-divider{
     clear:both;
-    background: #3DBBC2;
+    background: var(--divider);
     margin-bottom: 0;
 }
 
@@ -151,7 +196,7 @@ a:hover {
 footer {
     text-align: center;
     height: 50px;
-    color: #47B8B2;
+    color: var(--flashy-bg);
     padding: 5px;
     margin-top: 10px;
     bottom: 0px;
@@ -162,7 +207,7 @@ header {
 
 li {
     display: inline;
-    padding: 5px;
+    padding: 10px;
 }
 
 
@@ -269,7 +314,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 .btn-authentication:active {
     background-color: rgb(80, 59, 163)
-    box-shadow: 0 5px #666;
+    box-shadow: 0 4px #666;
     transform: translateY(4px);
   }
 .btn-status-round{

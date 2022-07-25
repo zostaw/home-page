@@ -3,6 +3,10 @@ venv/
 dev/
 start-local
 app/templates/about.html.back
+app/static/css/baseline.css.back
+app/static/css/layout.css.back
+app/templates/includes/header.html.old
+
 
 
 # below are common python ignore lists
