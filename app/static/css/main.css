@@ -7,16 +7,38 @@
     box-sizing: border-box;
 }
 
+/*  COLORS SET
+ *  complimentary:
+ *  #B8474D -- cool coral
+ *  #47B8B2 -- green light
+ *
+ *  #f5e1e0 -- very light coral
+ *
+ *  complimentary:
+ *  #C2443D -- warm icecream coral
+ *  #3DBBC2 -- mint green
+ *
+ *  #000000 -- black
+ *  #FFFFFF -- white
+ *
+ */
+
 html,
 body {
-    background: #47B8B2;
-    padding:0px;
-/*    font-family: Georgia, Helvetica, sans-serif; */
-    font-family: "Times New Roman", Times, serif;
+    color: #f5e1e0;
+    background: #1C0B0C;
+    /*background: #0b1c1b;*/
+    /*background: #47B8B2;*/
+    /*padding: 5px;*/
+    padding:2px;
+    font-family: Georgia, Helvetica, sans-serif; 
+    /*font-family: "Times New Roman", Times, serif;*/
     height: 100%;
-    position: relative;
+    /*position: relative;
+    vertical-align: middle;*/
     margin:0px;
 }
+
 
 /* removed - it was another field above menu */
 .top-container {
@@ -30,13 +52,22 @@ body {
     padding:5px;
     /*border-bottom:2px solid #0f0f0f;*/
 }
+
+
 .container {
-    background: #47B8B2;
-    padding:5px;
+    margin: auto;
+    width: 50%;
+    height: 100%;
+    background: #19413E;
+    /*background: #0b1c1b;*/
+    padding: 25px;
+    #margin: 25px;
     /*border-bottom:2px solid #0f0f0f;*/
 }
+
+
 .bottom-container {
-    background: #f5e1e0;
+    background: #0b1c1b;
     border-top:2px solid #f5e1e0;
     position:fixed;
     bottom:0;
@@ -57,7 +88,7 @@ body {
 }
 .homepage-divider{
     clear:both;
-    background: #FFFFFF;
+    background: #3DBBC2;
     margin-bottom: 0;
 }
 
@@ -94,18 +125,37 @@ a {
     font-weight: bold;*/
 }
 
-a:hover { background-color : #47B8B2; 
-color: #B8474D;}
+a:hover { 
+    /*background-color : #47B8B2; */
+    background-color: #B8474D;
+    color: #B8474D;}
 
+/*a-nav-item is really just the text of URL */
 .a-nav-item{
     text-decoration: none;
-    color: rgb(65,65,65);
+    color: #19413E;
     font-size: 1.5em;
     font-weight: bold;
 }
 
 .a-nav-item:hover{
+    /* "blue" 
     color : #694ed6;
+    greyinsh from pallete: */
+    color: #19413E;
+}
+
+/* btn-nav is the border of URL */
+.btn-nav{
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.2em;
+}
+.btn-nav:hover{
+    /*background: #eee;*/
+    background: #47B8B2;
 }
 
 .a-footer{
@@ -276,16 +326,6 @@ input[type=text]:focus, input[type=password]:focus {
        }
 }
 
-.btn-nav{
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 1.2em;
-}
-.btn-nav:hover{
-    background: #eee;
-}
 .vertical-line{
     border-left: 5px solid;
     border-image-slice: 1;

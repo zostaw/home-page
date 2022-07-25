@@ -1,6 +1,8 @@
 # below is defined my custom list
 venv/
 dev/
+start-local
+app/templates/about.html.back
 
 
 # below are common python ignore lists
