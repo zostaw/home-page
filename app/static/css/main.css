@@ -199,19 +199,23 @@ a:hover {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: black;
+  background-color: var(--dark-bg);
 }
 
 /* Modal Content */
 .modal-content {
   position: relative;
+  /*
   background-color: #fefefe;
+  */
+  background-color: var(--dark-bg);
   margin: auto;
   padding: 0;
+  /*
   width: auto;
-  /*width: 50%;*/
-  max-height: 50%;
-  max-width: 50%;
+  width: 50%;*/
+  max-height: 90vh;
+  max-width: 90vh;
 }
 
 /* The Close Button */
@@ -233,7 +237,10 @@ a:hover {
 
 /* Hide the slides by default */
 .mySlides {
+  margin: auto;
   display: none;
+  max-height: 80%;
+  max-width: 80%;
 }
 
 /* Next & previous buttons */
