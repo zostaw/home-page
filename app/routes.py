@@ -27,3 +27,7 @@ def blog():
 @app.route("/projects")
 def projects():
     return render_template("projects.html")
+
+@app.route("/mystory")
+def mystory():
+    return render_template("mystory.html")

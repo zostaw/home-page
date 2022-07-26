@@ -38,42 +38,33 @@
   --mid-dark-green: #1C0B0C;
   --light-dark-green: #19413E;
 
+  /* beige-whitey */
+  --light-beige: #F4F4EE;
   --black: #000000;
   --blue: #1e90ff;
   --white: #ffffff;
 
 /* the used colors */
-  --light-text: #f5e1e0;
-  /*
-  --nav-bg: #B8474D;
-  */
-  --nav-bg: #AC6253;
-  /*
-  --back-bg: #1C0B0C;
-  */
-  --back-bg: #19413E;
+  --text-color: #000000;
+  --nav-bg: #F9F9F6;
+  --back-bg: #F9F9F6;
   --dark-bg: #0B1C1B;
   --main-bg: #19413E;
-  --flashy-bg: #47B8B2;
+  --flashy: #636342;
   --divider: #000000;
-/*
-  --light-text: #f5e1e0;
-  --nav-bg: #19413E;
-  --dark-bg: #0B1C1B;
-  --back-bg: #1C0B0C;
-  --main-bg: #B84740;
-  --flashy-bg: #47B8B2;
-  --divider: #000000;
-  */
 }
 
 html,
 body {
-    color: var(--light-text);
+    color: var(--text-color);
     background: var(--back-bg);
     /*padding: 5px;*/
     padding:2px;
+    font-family: "Source Sans Pro";
+    font-weight: 300;
+    /*
     font-family: Georgia, Helvetica, sans-serif; 
+    */
     /*font-family: "Times New Roman", Times, serif;*/
     height: 100%;
     /*position: relative;
@@ -82,10 +73,21 @@ body {
 }
 
 
+.initials {
+    font-family: "Source Sans Pro";
+    font-size: 1.5em;
+    color: var(--dark-bg);
+    background-color: black;
+    border:1px;
+    font-weight: 900;
+    vertical-align: left;
+}
+
+
 /* removed - it was another field above menu */
 
 .top-container {
-    background: var(--light-text);
+    background: var(--text-color);
     padding:1px;
     /*border-bottom:2px solid #0f0f0f;*/
 }
@@ -93,10 +95,18 @@ body {
 /* menu */
 .nav {
     background: var(--nav-bg);
-    box-shadow: 2px 2px var(--black);
     margin: auto;
     width: 100%;
-    padding:1px;
+    padding:2px;
+}
+
+
+.horizontal-line {
+    margin: auto;
+    border-top: 1px solid;
+    border-image-slice: 1;
+    border-image-source: radial-gradient(circle, #000000 10%, #F9F9F6 100%); 
+    width: 80%;
 }
 
 
@@ -120,22 +130,22 @@ body {
 a {
     text-decoration: none;
     background-color: var(--nav-bg);
-    color: var(--flashy-bg);
+    color: var(--flashy);
+    font-weight: 400;
     /*font-size: 1.5em;
     font-weight: bold;*/
 }
 
 a:hover { 
     background-color: var(--nav-bg);
-    color: var(--nav-bg);}
+    color: var(--flashy);}
 
 /*a-nav-item is really just the text of URL */
 .a-nav-item{
     text-decoration: none;
     color: var(--main-bg);
     font-size: 1em;
-    /*font-size: 1.5em;*/
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .a-nav-item:hover{
@@ -155,21 +165,21 @@ a:hover {
 }
 .btn-nav:hover{
     /*background: #eee;*/
-    background: var(--flashy-bg);
+    /*background: var(--flashy);*/
 }
 
 /* navigation - end */
 
 .bottom-container {
     background: var(--dark-bg);
-    border-top:2px solid var(--light-text);
+    border-top:2px solid var(--text-color);
     position:fixed;
     bottom:0;
 }
 
 .footer-container {
     text-align: center;
-    background: var(--flashy-bg);
+    background: var(--flashy);
     position:fixed;
     bottom:0;
     height:25px;
@@ -196,7 +206,7 @@ a:hover {
 footer {
     text-align: center;
     height: 50px;
-    color: var(--flashy-bg);
+    color: var(--flashy);
     padding: 5px;
     margin-top: 10px;
     bottom: 0px;
@@ -379,6 +389,7 @@ input[type=text]:focus, input[type=password]:focus {
            transform: translateX(-100%); 
        }
 }
+
 
 .vertical-line{
     border-left: 5px solid;
