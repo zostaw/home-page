@@ -21,15 +21,27 @@ def index():
 def about():
     return render_template("about.html")
 
-@app.route("/blog")
-def blog():
-    return render_template("blog.html")
-
+###### projects section - start ######
 @app.route("/projects")
 def projects():
     return render_template("projects.html")
+
+@app.route("/spaced_repetition")
+def spaced_repetition():
+    #SpacedRepetition API
+    #import SpacedRepetition from SpacedRepetition
+
+    return render_template("spaced_repetition.html")
+
+###### projects section - start ######
+
+###### blogs section  - start ######
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
 
 @app.route("/mystory")
 def mystory():
     return render_template("blog/mystory.html")
 
+###### blogs section - end ######
