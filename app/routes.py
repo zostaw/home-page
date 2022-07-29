@@ -1,5 +1,6 @@
 from . import app
 from flask import render_template, Flask, request, redirect, url_for
+from flask import send_from_directory
 from flask_wtf import FlaskForm
 import os
 import datetime
@@ -30,4 +31,5 @@ def projects():
 
 @app.route("/mystory")
 def mystory():
-    return render_template("mystory.html")
+    return render_template("blog/mystory.html")
+
