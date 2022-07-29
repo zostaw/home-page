@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 import os
 import datetime
 import mimetypes
-
+import numpy as np
 
 mimetypes.add_type('image/svg+xml', '.svg')
 
@@ -38,9 +38,13 @@ def get_records():
     from .SpacedRepetition import SpacedRepetition
     db = SpacedRepetition(7, 5, "learning_words")
     db.AddRecord("", "lasting for a very short time", "ephemeral")
-    records_list = db.ReturnAllRecords()
+    records_list = db.ReturnAllRecords()[0]
     print(records_list)
-    return "something"
+    dict = {}
+    dict["name"]=records_list[1]
+    dict["question"]=records_list[2]
+    dict["answer"]=records_list[3]
+    return dict
 
 @app.route("/employee.json")
 def employee():
