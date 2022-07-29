@@ -2,13 +2,77 @@
 
 {% block content %}
 
+<head>
+
+   <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+<script src="{{ url_for('static', filename='get_records.js') }}"></script>
+
+</head>
+
+
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+    function set_output(text_value) {
+//        var text_value= "asdf";
+        document.getElementById("space-rep-output").innerHTML = text_value;
+}
+
+        $(function() {
+          $('a#space-rep-button').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/get_records',
+                function(data) {
+//               $('display').html('<p> Name: </p>');
+              //do nothing
+            });
+            $(set_output("fdsa"));
+            return false;
+          });
+
+        });
+</script>
+-->
+
+    <!-- Script to get JSON file and display its content -->
+     <!-- 
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        $('#fetch').click(function(event) {
+            $.getJSON('/get_records', function(data) {
+                $('#display').innerHTML('<p> Name: </p>');
+            });
+        });
+    });
+    </script>
+-->
+
     <!-- Page content -->
       <h1 style="font-size: 25px; text-align: center;">Spaced Repetition DEMO</h1>
 
-      <p>
-        Paragraph
-      </br>
-      </p>
+
+<p>Program output:</br>
+</p>
+<div id="space-rep-output">first</div>
+
+ <div id="display" style="background-color:#39B54A;">sur</div>     
+
+<input type="button" id="fetch" value="Fetch Employee Data" />
+
+
+
+
+ <p>Your answer: </br>
+<input type="text" id="space-rep-answer" name="space-rep-answer">
+</p>
+
+<!--
+<a href=# id="space-rep-button" ><button class='btn btn-default' >Submit</button></a>
+-->
+
+
 
 
 {% endblock %}
