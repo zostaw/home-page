@@ -13,7 +13,7 @@ cd ~/
 
 2. initiate local repo and load this project
 ```
-git clone git@https://github.com/zostaw/home-page.git
+git clone git@github.com:zostaw/home-page.git
 ```
 3. install venv
 ```
