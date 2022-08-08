@@ -4,4 +4,4 @@
 ps -ef | grep "$MAIN_DIR" | grep -v grep | grep -v start.sh | awk '{print $2}' | xargs kill -9 &>/dev/null
 
 export FLASK_APP=main.py
-flask run --host 0.0.0.0 --port 8000 &
+flask run --host 0.0.0.0 --port 8000 > $MAIN_DIR/flask.out 2>&1
