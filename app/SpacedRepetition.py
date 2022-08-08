@@ -19,7 +19,7 @@ from icecream import ic
 # to import in another program: from SpacedRepetition ##which is file### import SpacedRepetition ##which is class###
 class SpacedRepetition():
 
-    # database class - it serves to store and manage elements (facts/quotse) and provides 
+    # database class - it serves to store and manage elements (facts/quotse) and provides
     # querries to shufle them, add, manage the daily boxes
 
 
@@ -39,9 +39,9 @@ class SpacedRepetition():
         #initiate database
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
-    
 
-        # name is a label for a record, 
+
+        # name is a label for a record,
         # record_visible is a part that can be shown immediatelly
         # record_hidden would be a second part of the record, for example a response to question, that one should not seeat first
         # Is_In_Use states whether the record is assigned to any box already
@@ -49,15 +49,15 @@ class SpacedRepetition():
         c.execute('''
             CREATE TABLE IF NOT EXISTS Records
             (
-            [Record_Id] INTEGER PRIMARY KEY, 
-            [Record_Name] TEXT NOT NULL DEFAULT "", 
-            [Record_Visible] TEXT DEFAULT "", 
-            [Record_Hidden] TEXT DEFAULT "", 
-            [Is_In_Use] BOOLEAN DEFAULT 0, 
+            [Record_Id] INTEGER PRIMARY KEY,
+            [Record_Name] TEXT NOT NULL DEFAULT "",
+            [Record_Visible] TEXT DEFAULT "",
+            [Record_Hidden] TEXT DEFAULT "",
+            [Is_In_Use] BOOLEAN DEFAULT 0,
             [Days_In_Boxes] INTEGER DEFAULT 0
             )
             ''')
-        
+
         c.execute('''CREATE UNIQUE INDEX IF NOT EXISTS Records_Content_Idx on Records(Record_Name, Record_Visible, Record_Hidden)''')
 
         c.execute('''
@@ -86,7 +86,7 @@ class SpacedRepetition():
 
     def LoadParams(self):
         self.Type
-        
+
 #### Helping Methods
     def getParam(self, param_name):
 
@@ -94,13 +94,13 @@ class SpacedRepetition():
             raise ValueError("Wrong type of param_name: is " + str(type(param_name)) + " should be string.")
 
         db = self.db_name
-        
+
         conn = sqlite3.connect(db)
         c = conn.cursor()
         c.execute('''SELECT ''' + param_name + ''' FROM Params LIMIT 1''')
         result = c.fetchone()
         ic(str(np.squeeze(result)))
-        
+
         c.close()
 
         output = np.squeeze(result)
@@ -112,9 +112,9 @@ class SpacedRepetition():
         return output
 
     def execute_one(self, querry):
-        
+
         db = self.db_name
-        
+
         with sqlite3.connect(db) as conn:
             c = conn.cursor()
             c.execute('''PRAGMA foreign_keys = ON;''')
@@ -123,16 +123,16 @@ class SpacedRepetition():
             conn.commit()
         if conn:
             conn.close()
-        
+
         return output
 
 #### Record methods:
     def AddRecord(self, name, visible_text="", hidden_text=""):
-        # adds new row to 
+        # adds new row to
         db = self.db_name
-        
-        conn = sqlite3.connect(db)
+
         c = conn.cursor()
+        conn = sqlite3.connect(db)
         c.execute('''PRAGMA foreign_keys = ON;''')
         result = c.execute('''
             INSERT OR IGNORE INTO Records
@@ -216,7 +216,7 @@ class SpacedRepetition():
         c.execute('''update Records set Is_In_Use=0 where Record_Id = '''+ str(record_id) + ''';''')
         conn.commit()
         print("Discharging Record (done) " + str(record_id) + " from Box " + str(box_id))
-        
+
 
     def ReturnRecord(self, record_id):
         # output is list of elements
@@ -293,9 +293,9 @@ class SpacedRepetition():
     def PrintBox(self, box_id):
         # prints name of Box and then list of Records in this Box
 
-        
+
         Box_Records=self.ReturnBox(box_id)
-        if not Box_Records: 
+        if not Box_Records:
             print("Box" + str(box_id) + " is empty.")
             return None
         else:
@@ -315,8 +315,8 @@ class SpacedRepetition():
         # prints Records of All Boxes
         for Box_Id in self.ReturnAllBoxes():
             self.PrintBox(Box_Id)
-        
-        
+
+
 #### Interaction Methods
 
     def AssignNext(self, order_by=None):
@@ -344,14 +344,14 @@ class SpacedRepetition():
             return "order_by None, my fellow, please pick your new assignments manually by running AssignRecord(Record_Id)"
         else:
                 return "Wrong order_by, should be: 'infrequent' or 'random'"
-        
+
 
     def testBox(self, box, order="standard", limit="no"):
         # test memory on a box, it will repeat records until you get all right
         # parameters:
         # box - list of records
         # order - either standard (as provided) or random (shuffled)
-        # limit - how many questiosn should be asked - possibleoptions: 
+        # limit - how many questiosn should be asked - possibleoptions:
         #         "no" - not limited
         #         "daily_limit" - self.daily_limit will be applied
 
@@ -366,7 +366,7 @@ class SpacedRepetition():
             limit = self.daily_limit
             box = box[:limit]
 
-        clear = lambda: os.system('clear')       
+        clear = lambda: os.system('clear')
 
         input("A box is full of questions. You will be tested, here it comes, good luck!")
         # Do-while emulation, AllCorrect = False for initiate run
@@ -398,7 +398,7 @@ class SpacedRepetition():
         # single box will be shown in a loop until all answers are correct
         # once all answers are correct, it will once more ask them in a random manner and continue with the next box
         # a couple of questions from all boxes will be then presented in a random order once more after finishing with all boxes
-        
+
 
         clear = lambda: os.system('clear')
 
@@ -415,7 +415,7 @@ class SpacedRepetition():
         input("You finished and succeeded on all boxes. An ultimate test comes. Random questions will be asked from all boxes to challenge you once again, this time with random questions.")
         self.testBox(all_boxed_records, 'random')
 
-        
+
 
     def EoD_Rotation(self):
         # rotating boxes function
@@ -429,16 +429,16 @@ class SpacedRepetition():
 
         # if reached max_days: delete first Boxes
         #box_count = np.squeeze(self.execute_one('''select count(Box_Id) from BoxQueue'''))
-        
+
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
         c.execute('''PRAGMA foreign_keys = ON;''')
-        
+
         c.execute('''select Box_Id from BoxQueue''')
         boxes_list = c.fetchall()
         box_count = len(boxes_list)
 
-        
+
 
         print("max_num_boxes " + str(self.max_num_boxes))
         print("box_count: " + str(box_count))
@@ -501,7 +501,7 @@ if __name__ == '__main__':
 
     #rotation:
     # for i in range(10):
-    #     db.EoD_Rotation()    
+    #     db.EoD_Rotation()
 
     # db.PrintAllBoxes()
 
