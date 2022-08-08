@@ -131,8 +131,8 @@ class SpacedRepetition():
         # adds new row to
         db = self.db_name
 
-        c = conn.cursor()
         conn = sqlite3.connect(db)
+        c = conn.cursor()
         c.execute('''PRAGMA foreign_keys = ON;''')
         result = c.execute('''
             INSERT OR IGNORE INTO Records
