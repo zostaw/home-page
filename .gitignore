@@ -8,6 +8,7 @@ app/static/css/layout.css.back
 app/templates/includes/header.html.old
 learning_words
 .python-version
+flask.out
 
 
 # below are common python ignore lists

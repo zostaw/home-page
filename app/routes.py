@@ -73,4 +73,8 @@ def blog():
 def mystory():
     return render_template("blog/mystory.html")
 
+@app.route("/drawing")
+def drawing():
+    return render_template("blog/drawing.html")
+
 ###### blogs section - end ######
