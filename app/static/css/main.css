@@ -63,7 +63,7 @@ body {
     font-family: "Source Sans Pro";
     font-weight: 300;
     /*
-    font-family: Georgia, Helvetica, sans-serif; 
+    font-family: Georgia, Helvetica, sans-serif;
     */
     /*font-family: "Times New Roman", Times, serif;*/
     height: 100%;
@@ -105,7 +105,7 @@ body {
     margin: auto;
     border-top: 1px solid;
     border-image-slice: 1;
-    border-image-source: radial-gradient(circle, #000000 10%, #F9F9F6 100%); 
+    border-image-source: radial-gradient(circle, #000000 10%, #F9F9F6 100%);
     width: 80%;
 }
 
@@ -136,7 +136,7 @@ a {
     font-weight: bold;*/
 }
 
-a:hover { 
+a:hover {
     background-color: var(--nav-bg);
     color: var(--flashy);}
 
@@ -149,7 +149,7 @@ a:hover {
 }
 
 .a-nav-item:hover{
-    /* "blue" 
+    /* "blue"
     color : #694ed6;
     greyinsh from pallete: */
     color: var(--main-bg);
@@ -356,11 +356,15 @@ header {
     text-align: center;
 }
 
-li {
+nav-li {
     display: inline;
     padding: 10px;
 }
 
+li {
+    list-style-type: circle;
+    padding: 10px;
+}
 
 
 .a-footer{
@@ -444,7 +448,7 @@ input[type=text]:focus, input[type=password]:focus {
     float: right;
     text-align: center;
     /* display: inline; */
-    
+
 }
 .btn-authentication{
     background-color: rgb(105,78,214);
@@ -497,7 +501,7 @@ input[type=text]:focus, input[type=password]:focus {
     margin-bottom: 0.5em;
 }
 .scroll-left {
-    height: 50px;  
+    height: 50px;
     overflow: hidden;
     position: relative;
    /* background: black;
@@ -523,11 +527,11 @@ input[type=text]:focus, input[type=password]:focus {
 @keyframes scroll-left {
        0%
        {
-           transform: translateX(40%); 
+           transform: translateX(40%);
        }
-       100% 
+       100%
        {
-           transform: translateX(-100%); 
+           transform: translateX(-100%);
        }
 }
 
@@ -546,7 +550,7 @@ input[type=text]:focus, input[type=password]:focus {
     filter: invert(59%) sepia(67%) saturate(564%) hue-rotate(58deg) brightness(94%) contrast(101%);
 	padding-right: 3px;
 	vertical-align: -2px;
-}	
+}
 
 .filter-red{
 	filter: invert(26%) sepia(94%) saturate(2943%) hue-rotate(340deg) brightness(98%) contrast(84%) ;
