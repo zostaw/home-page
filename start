@@ -8,10 +8,11 @@ elif [[ -f $MAIN_DIR/venv/bin/activate ]]; then
 echo "venv detected in $MAIN_DIR, using it to run flask"
 cd $MAIN_DIR/venv/bin/
 . ./activate
-cd $MAIN_DIR
 else
 echo "no python detected for this application, using the system one"
 fi
+
+cd $MAIN_DIR
 
 LSOF=$(lsof -i :$PORT | sed '1d')
 if [ ! "$LSOF" == "" ]; then
