@@ -1,9 +1,16 @@
 #!/bin/bash
 MAIN_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+if [[ -f $MAIN_DIR/.python-version ]]; then
+echo ".python-version located in $MAIN_DIR, using it to run flask"
+elif [[ -f $MAIN_DIR/venv/bin/activate ]]; then
+echo "venv detected in $MAIN_DIR, using it to run flask"
 cd $MAIN_DIR/venv/bin/
 . ./activate
 cd $MAIN_DIR
+else
+echo "no python detected for this application, using the system one"
+fi
 
 ps -ef | grep "$MAIN_DIR" | grep -v grep | grep -v start | awk '{print $2}' | xargs kill -9 &>/dev/null
 
