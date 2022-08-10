@@ -1,8 +1,9 @@
 #!/bin/bash
 MAIN_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PORT=8000
 
-PS_LIST=$(ps -ef | grep "$MAIN_DIR" | grep -v grep | grep -v start | grep -v cronjob | awk '{print $2}')
+LSOF=$(lsof -i :$PORT | sed '1d')
 
-if [[ $PS_LIST == "" ]]; then
+if [[ $LSOF == "" ]]; then
 	$MAIN_DIR/start
 fi

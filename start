@@ -1,5 +1,6 @@
 #!/bin/bash
 MAIN_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PORT=8000
 
 if [[ -f $MAIN_DIR/.python-version ]]; then
 echo ".python-version located in $MAIN_DIR, using it to run flask"
@@ -12,7 +13,10 @@ else
 echo "no python detected for this application, using the system one"
 fi
 
-ps -ef | grep "$MAIN_DIR" | grep -v grep | grep -v start | awk '{print $2}' | xargs kill -9 &>/dev/null
+LSOF=$(lsof -i :$PORT | sed '1d')
+if [ ! "$LSOF" == "" ]; then
+echo $LSOF | awk '{print $2}' | xargs kill -9 &>/dev/null
+fi
 
 export FLASK_APP=main.py
-flask run --host 0.0.0.0 --port 8000 > $MAIN_DIR/flask.out 2>&1
+flask run --host 0.0.0.0 --port $PORT > $MAIN_DIR/flask.out 2>&1
