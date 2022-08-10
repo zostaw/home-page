@@ -1,0 +1,8 @@
+#!/bin/bash
+MAIN_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+PS_LIST=$(ps -ef | grep "$MAIN_DIR" | grep -v grep | grep -v start | grep -v cronjob | awk '{print $2}')
+
+if [[ $PS_LIST == "" ]]; then
+	$MAIN_DIR/start
+fi
