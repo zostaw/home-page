@@ -7,7 +7,7 @@ echo ".python-version located in $MAIN_DIR, using it to run flask"
 elif [[ -f $MAIN_DIR/venv/bin/activate ]]; then
 echo "venv detected in $MAIN_DIR, using it to run flask"
 cd $MAIN_DIR/venv/bin/
-. ./activate
+. ./activate &>/dev/null 2>&1
 else
 echo "no python detected for this application, using the system one"
 fi
@@ -16,8 +16,8 @@ cd $MAIN_DIR
 
 LSOF=$(lsof -i :$PORT | sed '1d')
 if [ ! "$LSOF" == "" ]; then
-echo $LSOF | awk '{print $2}' | xargs kill -9 &>/dev/null
+echo $LSOF | awk '{print $2}' | xargs kill -9 &>/dev/null 2>&1
 fi
 
 export FLASK_APP=main.py
-flask run --host 0.0.0.0 --port $PORT > $MAIN_DIR/flask.out 2>&1
+flask run --host 0.0.0.0 --port $PORT &> $MAIN_DIR/flask.out 2>&1 &
