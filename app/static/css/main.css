@@ -100,6 +100,28 @@ body {
     padding:2px;
 }
 
+nav-li {
+    display: inline;
+    padding: 10px;
+}
+
+.nav-logo {
+    background: var(--nav-bg);
+    position: absolute;
+    left: 1%;
+    width: 4%;
+    padding:0px;
+}
+
+
+/*buffer should have same size as logo, it's suppose to keep navigation in the middle*/
+.nav-buffer {
+    background: var(--nav-bg);
+    position: absolute;
+    right: 10vh;
+    padding:2px;
+}
+
 
 .horizontal-line {
     margin: auto;
@@ -356,10 +378,6 @@ header {
     text-align: center;
 }
 
-nav-li {
-    display: inline;
-    padding: 10px;
-}
 
 li {
     list-style-type: circle;
