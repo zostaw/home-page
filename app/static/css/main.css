@@ -86,9 +86,12 @@ body {
 
 /* removed - it was another field above menu */
 
-.top-container {
-    background: var(--text-color);
-    padding:1px;
+.header-container {
+    padding:0px;
+    position:fixed;
+    top:0;
+    /*height:25px;*/
+    width: 4%
     /*border-bottom:2px solid #0f0f0f;*/
 }
 
@@ -104,24 +107,6 @@ nav-li {
     display: inline;
     padding: 10px;
 }
-
-.nav-logo {
-    background: var(--nav-bg);
-    position: absolute;
-    left: 1%;
-    width: 4%;
-    padding:0px;
-}
-
-
-/*buffer should have same size as logo, it's suppose to keep navigation in the middle*/
-.nav-buffer {
-    background: var(--nav-bg);
-    position: absolute;
-    right: 10vh;
-    padding:2px;
-}
-
 
 .horizontal-line {
     margin: auto;

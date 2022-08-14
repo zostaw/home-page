@@ -2,19 +2,12 @@
  	<nav>
 	    <ul>
 
-                <nav-logo class="nav-logo"  >
-                        <button class="btn-nav">
-                                <a class="a-nav-item" href="{{ url_for('index') }}" class="nav-link active">
-                                        <img id="logo" src="static/images/logo.png" style="border-style: solid; border-width: 0px; width: 100%; height:100%;">
-                </a></button></nav-logo>
-
                 <nav-li class="nav-item"><button class="btn-nav"><a class="a-nav-item nav-link" href="{{ url_for('index') }}">About</a></button></nav-li>
 		<!-- <li class="nav-item"><button class="btn-nav"><a class="a-nav-item" href="{{ url_for('about') }}" class="nav-link active">About</a></button></li> -->
                 <nav-li class="nav-item"><button class="btn-nav"><a class="a-nav-item nav-link" href="{{ url_for('blog') }}">Blog</a></button></nav-li>
                 <nav-li class="nav-item"><button class="btn-nav"><a class="a-nav-item nav-link" href="{{ url_for('projects') }}">Projects</a></button></nav-li>
 
 
-                <nav-buffer class="nav-buffer"></nav-buffer>
             </ul>
         </nav>
 	</header>
