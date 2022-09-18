@@ -29,12 +29,12 @@ def process_test():
     if request.method == "POST":
         qtc_data = request.get_json()
         print(qtc_data)
-        results = {'processed': 'true'}  
+        results = {'processed': 'true'}
         return jsonify(results)
 
 @app.route("/get_records")
 def get_records():
-    
+
     from .SpacedRepetition import SpacedRepetition
     db = SpacedRepetition(7, 5, "learning_words")
     db.AddRecord("", "lasting for a very short time", "ephemeral")
@@ -45,6 +45,7 @@ def get_records():
     dict["question"]=records_list[2]
     dict["answer"]=records_list[3]
     return dict
+
 
 @app.route("/employee.json")
 def employee():
