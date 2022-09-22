@@ -32,8 +32,8 @@ def process_test():
         results = {'processed': 'true'}
         return jsonify(results)
 
-@app.route("/get_records")
-def get_records():
+@app.route("/sr_get_records")
+def sr_get_records():
 
     from .SpacedRepetition import SpacedRepetition
     db = SpacedRepetition(7, 5, "learning_words")
