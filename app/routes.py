@@ -1,5 +1,5 @@
 from . import app
-from flask import render_template, Flask, request, redirect, url_for, jsonify
+from flask import render_template, Flask, request, redirect, url_for, jsonify, json
 from flask import send_from_directory
 from flask_wtf import FlaskForm
 import os
@@ -8,6 +8,10 @@ import mimetypes
 import numpy as np
 
 mimetypes.add_type('image/svg+xml', '.svg')
+
+
+from .SpacedRepetition import SpacedRepetition
+db = SpacedRepetition(7, 5, "learning_words")
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -32,13 +36,20 @@ def process_test():
         results = {'processed': 'true'}
         return jsonify(results)
 
-@app.route("/sr_get_records")
-def sr_get_records():
+@app.route('/sr_get_all_boxes', methods=['POST'])
+def sr_get_all_boxes():
+    output = request.get_json()
 
-    from .SpacedRepetition import SpacedRepetition
-    db = SpacedRepetition(7, 5, "learning_words")
-    db.AddRecord("", "lasting for a very short time", "ephemeral")
-    records_list = db.ReturnAllRecords()[0]
+    boxes_list = str(db.ReturnAllBoxes())
+    print(boxes_list)
+    return jsonify(boxes_list)
+
+
+@app.route('/sr_get_records', methods=['POST'])
+def sr_get_records():
+    output = request.get_json()
+
+    records_list = db.ReturnAllRecords()
     print(records_list)
     dict = {}
     dict["name"]=records_list[1]
@@ -60,6 +71,7 @@ def spaced_repetition():
     #SpacedRepetition API
     #import SpacedRepetition from SpacedRepetition
     #a=get_records()
+
 
     return render_template("spaced_repetition.html")
 
