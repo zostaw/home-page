@@ -1,4 +1,3 @@
-from . import app
 from flask import render_template, Flask, request, redirect, url_for, jsonify, json
 from flask import send_from_directory
 from flask_wtf import FlaskForm
@@ -9,10 +8,10 @@ import numpy as np
 
 mimetypes.add_type('image/svg+xml', '.svg')
 
+app = Flask(__name__)
 
-from .SpacedRepetition import SpacedRepetition
+from SpacedRepetition import SpacedRepetition
 db = SpacedRepetition(7, 5, "learning_words")
-
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
@@ -91,3 +90,7 @@ def drawing():
     return render_template("blog/drawing.html")
 
 ###### blogs section - end ######
+
+
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0')

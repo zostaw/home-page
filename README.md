@@ -27,3 +27,17 @@ python3 -m venv venv
 ```
 pip install --no-cache-dir -r ./requirements.txt
 ```
+
+
+## Starting
+The server is implemented to run in two modes:
+1. development mode
+It will use dummy flask server, it is not recommended for production.
+'''
+./start dev
+'''
+2. production mode
+It will use WSGI server (gunicorn), this is recommended option for production.
+'''
+./start prod
+'''
