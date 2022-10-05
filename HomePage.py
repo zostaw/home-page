@@ -44,6 +44,23 @@ class HomePage:
     def make(self):
         pass
 
+    def stop(self):
+        # read lsof output for server port_number
+        with Popen(
+            ["lsof", "-i", f":{str(self.port_number)}"], stdout=subprocess.PIPE
+        ) as proc:
+            lsof_line = proc.stdout.readlines(0)
+
+        try:
+            # check if any process listens on the port -> then separate pid from the string
+            pid = str(lsof_line[1]).split(" ")[1]
+            if pid:
+                print(f"Killing process on pid={pid}")
+                os.kill(int(pid), SIGTERM)
+        except IndexError:
+            print(f"No process listening on port {self.port_number}")
+
+
     def start(self):
         """
         This method will perform necessary checks and start/restart server: dev or prod, depending on server_mode.
@@ -55,21 +72,7 @@ class HomePage:
         working_dir = os.path.dirname(os.path.realpath(__file__))
 
         #cleanup after previous processes
-
-        # read lsof output for server port_number
-        with Popen(
-            ["lsof", "-i", f":{str(self.port_number)}"], stdout=subprocess.PIPE
-        ) as proc:
-            lsof_line = proc.stdout.readlines(0)
-
-        try:
-            # check if any process listens on the port -> then separate pid from the string
-            pid = str(lsof_line[1]).split(" ")[1]
-            if pid:
-                print("Killing process on pid={pid}")
-                os.kill(int(pid), SIGTERM)
-        except IndexError:
-            print(f"No process listening on port {self.port_number}")
+        self.stop()
 
         # start
         if self.server_mode == "dev":
@@ -111,12 +114,14 @@ if __name__ == "__main__":
 
     cmd = sys.argv[1]
 
-    if cmd not in {"make", "start"}:
+    if cmd not in {"make", "start", "stop"}:
         raise ValueError(
-            "Must provide option: 'make'/'start'"
+            "Must provide option: 'make'/'start'/'stop'"
         )
 
     if cmd == "make":
         HomePage.make()
     elif cmd == "start":
         HomePage.start()
+    elif cmd == "stop":
+        HomePage.stop()
