@@ -52,23 +52,9 @@ class HomePage:
             raise ValueError(
                 f"server_mode is \"{self.server_mode}\", must be either 'prod' for WSGI or 'dev' for testing purposes."
             )
-
-        # Find python venv
         working_dir = os.path.dirname(os.path.realpath(__file__))
-        if os.path.isfile(os.path.join(working_dir, ".python-version")):
-            print(
-                f".python-version located in {working_dir}, it will be used to start server."
-            )
-        elif os.path.isfile(os.path.join(working_dir, "/venv/bin/activate")):
-            print(
-                f"venv detected in {working_dir}/venv/bin/activate, using it to run flask"
-            )
-            # run activate
-            pass
-        else:
-            print("No python venv detected for this application, using the system one.")
 
-        # cleanup after previous processes
+        #cleanup after previous processes
 
         # read lsof output for server port_number
         with Popen(
@@ -120,13 +106,15 @@ if __name__ == "__main__":
         blogs_dir=os.path.join(".", "app/templates/blog"),
         app_name="app",
         server_mode="prod",
-        port_number=8000,
+        port_number=8000
     )
 
     cmd = sys.argv[1]
 
     if cmd not in {"make", "start"}:
-        raise ValueError("Must provide option: 'make'/'start'")
+        raise ValueError(
+            "Must provide option: 'make'/'start'"
+        )
 
     if cmd == "make":
         HomePage.make()
