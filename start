@@ -26,7 +26,7 @@ if [ "$1" == "dev" ]; then
     flask run --host 0.0.0.0 --port $PORT &> $MAIN_DIR/flask.out 2>&1 &
 elif [ "$1" == "prod" ]; then
     echo "Starting wsgi."
-    gunicorn --bind 0.0.0.0:8000 wsgi:app
+    gunicorn --bind 0.0.0.0:$PORT wsgi:app
 else
     echo "Choose starting mode:"
     echo 'For dev purpose, execute: ./start "dev"'
