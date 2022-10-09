@@ -169,10 +169,6 @@ a:hover {
     display: inline-block;
     font-size: 1.2em;
 }
-.btn-nav:hover{
-    /*background: #eee;*/
-    /*background: var(--flashy);*/
-}
 
 /* navigation - end */
 
@@ -472,7 +468,7 @@ input[type=text]:focus, input[type=password]:focus {
     background-color: rgb(80, 59, 163)
 }
 .btn-authentication:active {
-    background-color: rgb(80, 59, 163)
+    background-color: rgb(80, 59, 163);
     box-shadow: 0 4px #666;
     transform: translateY(4px);
   }

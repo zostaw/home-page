@@ -8,8 +8,10 @@ Created on Thu Jul 14 12:00:00 2022
 from hashlib import new
 import os
 import sqlite3
+from types import NoneType
 import numpy as np
 import random
+from itertools import chain
 
 # debugging library
 from icecream import ic
@@ -23,7 +25,7 @@ class SpacedRepetition:
 
     #### init Methods
 
-    def __init__(self, num_of_boxes=7, daily_limit=5, db_name="db_name"):
+    def __init__(self, db_name="db_name", num_of_boxes=7, daily_limit=5):
 
         self.db_name = db_name
         self.max_num_boxes = num_of_boxes
@@ -92,7 +94,9 @@ class SpacedRepetition:
 
         conn.commit()
 
-        self.CreateBox()
+        # commented out - the box should not be created on each connection
+        # if it's needed for assigning record to empty box and it does not exist, the box should be created before
+        # self.CreateBox()
 
     def LoadParams(self):
         self.Type
@@ -178,7 +182,7 @@ class SpacedRepetition:
 
         return Record_Id
 
-    def RemoveRecord(self):
+    def RemoveRecord(self, name):
         pass
 
     def AssignRecord(self, record_id, box_id=None):
@@ -191,7 +195,7 @@ class SpacedRepetition:
                 + str(type(record_id))
                 + " should be integer."
             )
-        if not isinstance(box_id, int) and not None:
+        if not isinstance(box_id, int) and not isinstance(box_id, (str, type(None))):
             raise ValueError(
                 "Wrong type of box_id: is "
                 + str(type(box_id))
@@ -220,7 +224,7 @@ class SpacedRepetition:
                 )
             # Create box if zero
             if not box_id > 0 and self.max_num_boxes > 0:
-                self.CreateBox()
+                box_id = self.CreateBox()
             # Assign
             conn = sqlite3.connect(self.db_name)
             c = conn.cursor()
@@ -459,16 +463,48 @@ class SpacedRepetition:
                     + " ."
                 )
 
-    def ReturnAllBoxes(self):
+    def ReturnAllBoxesIds(self):
         # returns list of Boxes names as list
         output = self.execute_one("""select Box_Id from BoxQueue""")
         Boxes_Ids = np.squeeze(output)
 
         return Boxes_Ids
 
+    def ReturnAllBoxes(self):
+        # returns list of Boxes Records as list
+
+        AllBoxes = []
+
+        # the return type of ReturnAllBoxesIds can be: int, empty (ndarray) or a list
+        # the for loop does not handle it well, therefore below are all 3 options handled
+
+        # first initiate empty list
+        boxes_list = []
+        returned_list = self.ReturnAllBoxesIds().tolist()
+
+        # if returned int, add it to list
+        if isinstance(returned_list, int):
+            boxes_list.append(returned_list)
+        # if returned list, replace the empty one - append cannot be used, because empty elements are created
+        if isinstance(returned_list, list):
+            boxes_list = returned_list
+
+        # if neither int nor list came from ReturnAllBoxes, then skip
+        if not boxes_list:
+            return None
+
+        for box_id in boxes_list:
+            box = self.ReturnBox(box_id)
+            # save into a list if not empty
+            if box == [] or type(box) is NoneType:
+                continue
+            AllBoxes.append(box)
+
+        return AllBoxes
+
     def PrintAllBoxes(self):
         # prints Records of All Boxes
-        for Box_Id in self.ReturnAllBoxes():
+        for Box_Id in self.ReturnAllBoxesIds():
             self.PrintBox(Box_Id)
 
     #### Interaction Methods
@@ -541,7 +577,7 @@ class SpacedRepetition:
                 random.shuffle(box)
             for record in box:
                 clear()
-                print("Question: " + record[1] + record[2])
+                print(record[1] + "-> Question: " + record[2])
                 response = input("Answer:  ")
                 if response == record[3]:
                     print(
@@ -558,31 +594,35 @@ class SpacedRepetition:
                 input("Continue...")
             if not AllCorrect:
                 input("You made mistakes. Here try again and prove that you can do it!")
-        input("You made it through the box!")
         return AllCorrect
 
     def PlaySession(self):
         # method that will provide the daily set of Repetition Session
         # it will print questions for each box in order and request an answer
-        # single box will be shown in a loop until all answers are correct
+        # single box will be shown in a loop until all answers are correct (testBox())
         # once all answers are correct, it will once more ask them in a random manner and continue with the next box
         # a couple of questions from all boxes will be then presented in a random order once more after finishing with all boxes
 
         clear = lambda: os.system("clear")
 
-        boxes_list = self.ReturnAllBoxes()
-        all_boxed_records = []
-        for box_id in boxes_list:
-            box = self.ReturnBox(box_id)
-            # play session on one box at a time
-            self.testBox(box, "random")
-            # save into a list
-            if not box == []:
-                all_boxed_records += box
+        all_boxed_records = self.ReturnAllBoxes()
+
+        if not all_boxed_records:
+            print("There are no boxes, initiate first")
+            return
+
+        no_boxes = len(all_boxed_records)
+        print(f"You'll be tested against {no_boxes} boxes.")
+
+        for box_id in range(no_boxes):
+            self.testBox(all_boxed_records[box_id], "random")
+            input("You made it through the box!")
 
         input(
             "You finished and succeeded on all boxes. An ultimate test comes. Random questions will be asked from all boxes to challenge you once again, this time with random questions."
         )
+        # all_boxes_records is nested list, for the final test, all records should be together
+        all_boxed_records = list(chain(*all_boxed_records))
         self.testBox(all_boxed_records, "random")
 
     def EoD_Rotation(self):
@@ -642,7 +682,7 @@ class SpacedRepetition:
 
 
 if __name__ == "__main__":
-    db = SpacedRepetition(7, 5, "learning_words")
+    db = SpacedRepetition("learning_words", 7, 5)
 
     # db.AddRecord("Oumi Janta", "If I can see you grove -- if you have fun -- I can see that you trully feel the music and feel the track -- And that makes you move much more beautiful", "")
 
@@ -667,11 +707,5 @@ if __name__ == "__main__":
         "nunchi",
         "the subtle art and ability to listen and gauge others' moods, it means 'eye force/power'",
     )
-
-    # rotation:
-    # for i in range(10):
-    #     db.EoD_Rotation()
-
-    # db.PrintAllBoxes()
 
     db.PlaySession()

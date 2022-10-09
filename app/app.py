@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 from SpacedRepetition import SpacedRepetition
 
-db = SpacedRepetition(7, 5, "learning_words")
+db = SpacedRepetition("learning_words", 7, 5)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -42,13 +42,21 @@ def process_test():
 
 @app.route("/sr_get_all_boxes", methods=["POST"])
 def sr_get_all_boxes():
-    output = request.get_json()
+    # Returns rank 3 tensor:
+    # 0D: box number
+    # 1D: record within box
+    # 2D: value: 0 - Id, 1 - Name, 2 - Visible value/question, 3 - Hidden value/Answer, 4 - "Is in use", 5 - "Days in boxes"
+    # For example: boxes_list[2][1][3] is record from 2 (starting from 0) box, 1 record, 3 value: Answer
 
-    boxes_list = str(db.ReturnAllBoxes())
-    print(boxes_list)
+    rec_request = request.get_json()
+    print("request: " + str(rec_request))
+
+    boxes_list = db.ReturnAllBoxes()
+
     return jsonify(boxes_list)
 
 
+# this below is not used, but it is good example for handling dict data received from SpacedRepetition.py
 @app.route("/sr_get_records", methods=["POST"])
 def sr_get_records():
     output = request.get_json()
@@ -60,11 +68,6 @@ def sr_get_records():
     dict["question"] = records_list[2]
     dict["answer"] = records_list[3]
     return dict
-
-
-@app.route("/employee.json")
-def employee():
-    return "employee.json"
 
 
 @app.route("/projects")

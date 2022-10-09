@@ -60,7 +60,6 @@ class HomePage:
         except IndexError:
             print(f"No process listening on port {self.port_number}")
 
-
     def start(self):
         """
         This method will perform necessary checks and start/restart server: dev or prod, depending on server_mode.
@@ -71,7 +70,7 @@ class HomePage:
             )
         working_dir = os.path.dirname(os.path.realpath(__file__))
 
-        #cleanup after previous processes
+        # cleanup after previous processes
         self.stop()
 
         # start
@@ -108,16 +107,14 @@ if __name__ == "__main__":
         templates_dir=os.path.join(".", "app/templates"),
         blogs_dir=os.path.join(".", "app/templates/blog"),
         app_name="app",
-        server_mode="prod",
-        port_number=8000
+        server_mode="dev",
+        port_number=8000,
     )
 
     cmd = sys.argv[1]
 
     if cmd not in {"make", "start", "stop"}:
-        raise ValueError(
-            "Must provide option: 'make'/'start'/'stop'"
-        )
+        raise ValueError("Must provide option: 'make'/'start'/'stop'")
 
     if cmd == "make":
         HomePage.make()
