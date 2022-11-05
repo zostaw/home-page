@@ -29,6 +29,18 @@ spec:
     - sleep
     args:
     - infinity
+  - name: docker
+    image: docker:20.10.21-alpine3.16
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - mountPath: /var/run/docker.sock
+        name: docker-sock
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
 '''
             // Can also wrap individual steps:
             // container('shell') {
@@ -51,21 +63,19 @@ spec:
         stage('Test') {
             steps {
                 echo 'Testing..'
-
-                sh 'python HomePage.py start'
+                sh 'python HomePage.py start &'
             }
         }
         stage('Build') {
-            agent{
-                docker {
-                    image "docker:20.10.21-alpine3.16"
-                }
-           }
             steps {
                 echo 'Building..'
-                sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
-                sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
-            }
+                container('docker') {
+                    sh 'hostname'
+                    sh 'pwd'
+                    sh 'ls -las'
+                    sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+                }
+}
         }
         stage('Deploy') {
             steps {
