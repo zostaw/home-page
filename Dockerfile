@@ -1,4 +1,4 @@
-FROM docker:20.10.21-alpine3.16
+FROM python:3.10.5-alpine
 
 RUN apk --update add bash vim g++ gcc musl-dev linux-headers
 ENV STATIC_URL /static
@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 RUN mkdir ~/.ssh
 RUN echo "Host *" >> ~/.ssh/config
-RUN echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+RUN echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
 # URL under which static (not modified by Python) files will be requested
 # They will be served by Nginx directly, without being handled by uWSGI
