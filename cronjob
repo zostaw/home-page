@@ -1,9 +1,0 @@
-#!/bin/bash
-MAIN_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-PORT=8000
-
-LSOF=$(lsof -i :$PORT | sed '1d')
-
-if [[ $LSOF == "" ]]; then
-	$MAIN_DIR/start
-fi

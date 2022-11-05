@@ -5,7 +5,6 @@ Created on Thu Jul 14 12:00:00 2022
 @author: zostaw
 """
 
-from hashlib import new
 import os
 import sqlite3
 from types import NoneType

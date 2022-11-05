@@ -1,10 +1,5 @@
-from flask import render_template, Flask, request, redirect, url_for, jsonify, json
-from flask import send_from_directory
-from flask_wtf import FlaskForm
-import os
-import datetime
+from flask import render_template, Flask, request, jsonify
 import mimetypes
-import numpy as np
 
 mimetypes.add_type("image/svg+xml", ".svg")
 
