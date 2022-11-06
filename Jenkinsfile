@@ -35,9 +35,9 @@ spec:
       - mountPath: /var/run/docker.sock
         name: docker-sock
   - name: docker
-     image: docker:20.10.21-alpine3.16
-     command:
-     - cat
+    image: docker:20.10.21-alpine3.16
+    command:
+    - cat
     tty: true
     volumeMounts:
       - mountPath: /var/run/docker.sock
