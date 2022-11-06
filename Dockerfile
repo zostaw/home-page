@@ -1,4 +1,4 @@
-FROM zostaw:python-numpy-1.0
+FROM zostaw/numpy:python-numpy-1.0
 
 RUN apk --update add bash vim g++ gcc musl-dev linux-headers
 ENV STATIC_URL /static

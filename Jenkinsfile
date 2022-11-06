@@ -7,6 +7,7 @@ pipeline {
     environment {
         IMAGE_NAME = "zostaw/home-page"
         IMAGE_TAG = "python-app-1.0"
+        dockerhub = credentials("dockerhub")
     }
     agent {
         kubernetes {
@@ -24,7 +25,7 @@ kind: Pod
 spec:
   containers:
   - name: shell
-    image: zostaw:python-numpy-1.0
+    image: zostaw/numpy:python-numpy-1.0
     command:
     - sleep
     args:
@@ -80,6 +81,8 @@ spec:
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
+                sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'
             }
         }
     }
