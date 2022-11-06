@@ -24,7 +24,7 @@ kind: Pod
 spec:
   containers:
   - name: shell
-    image: python:3.10.5-alpine
+    image: clearlinux/numpy-mp
     command:
     - sleep
     args:

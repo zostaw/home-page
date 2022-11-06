@@ -1,4 +1,4 @@
-FROM python:3.10.5-alpine
+FROM clearlinux/numpy-mp
 
 RUN apk --update add bash vim g++ gcc musl-dev linux-headers
 ENV STATIC_URL /static
