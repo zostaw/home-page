@@ -8,7 +8,7 @@ pipeline {
         IMAGE_NAME = "zostaw/home-page"
         IMAGE_TAG = "python-app-1.0"
         dockerhub = credentials("dockerhub")
-        ssh_cred = credentials("octojenkssh")
+        sshkey = credentials("file_octojenkssh")
     }
     agent {
         kubernetes {
@@ -43,6 +43,12 @@ spec:
     volumeMounts:
       - mountPath: /var/run/docker.sock
         name: docker-sock
+  - name: ssh
+    image: jenkins/ssh-agent:alpine
+    command:
+    - sleep
+    args:
+    - infinity
   volumes:
   - name: docker-sock
     hostPath:
@@ -85,30 +91,27 @@ spec:
                 }
             }
         }
-        stage('Deploy') {
-            steps{
-            script{
-                def remote = [:]
-                remote.name = 'octo'
-                remote.host = 'octo'
-                remote.user = $ssh_cred_USR
-                remote.password = $ssh_cred_PSW
-                remote.allowAnyHosts = true
-            writeFile file: 'create_home_page.yaml', text: "\
-apiVersion: v1\
-kind: Pod\
-metadata:\
-name: home-page\
-spec:\
-containers:\
-- name: home-page\
-    image: $IMAGE_NAME:$IMAGE_TAG\
-    ports:\
-    - containerPort: 8000\
+          stage('Deploy'){
+              steps{
+                  container('ssh'){
+                    sh 'cat ${sshkey} > /tmp/secret && chmod 0600 /tmp/secret'
+                    sh '''ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "
+cat <<EOF > ./create_home_page.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: home-page
+spec:
+  containers:
+  - name: home-page
+    image: $IMAGE_NAME:$IMAGE_TAG
+    ports:
+    - containerPort: 8000
 "
-                sshCommand remote: remote, command: "kubectl create -f create_home_page.yaml"
-            }
-            }
+'''
+                    sh 'ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "/usr/bin/microk8s kubectl create -f ./create_home_page.yaml"'
+                }
+              }
         }
     }
 
