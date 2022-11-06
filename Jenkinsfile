@@ -109,7 +109,7 @@ spec:
     - containerPort: 8000
 "
 '''
-                    sh 'ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "/usr/bin/microk8s kubectl create -f ./create_home_page.yaml"'
+                    sh 'ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "/usr/bin/microk8s kubectl apply -f ./create_home_page.yaml"'
                 }
               }
         }
