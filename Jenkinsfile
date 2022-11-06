@@ -85,13 +85,13 @@ spec:
                 }
             }
         }
-        def remote = [:]
-        remote.name = 'octo'
-        remote.host = 'octo'
-        remote.user = $ssh_cred_USR
-        remote.password = $ssh_cred_PSW
-        remote.allowAnyHosts = true
         stage('Deploy') {
+            def remote = [:]
+            remote.name = 'octo'
+            remote.host = 'octo'
+            remote.user = $ssh_cred_USR
+            remote.password = $ssh_cred_PSW
+            remote.allowAnyHosts = true
             writeFile file: 'create_home_page.yaml', text: "\
 apiVersion: v1\
 kind: Pod\
