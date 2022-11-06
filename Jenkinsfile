@@ -74,7 +74,7 @@ spec:
         stage('Build') {
             steps {
                 echo 'Building..'
-                agent("container"){
+                container("docker"){
                     sh 'hostname'
                     sh 'pwd'
                     sh 'ls -las'
@@ -84,7 +84,7 @@ spec:
         }
         stage('Deploy') {
             steps {
-                agent("container"){
+                container("docker"){
                     echo 'Deploying....'
                     sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
                     sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'
