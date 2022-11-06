@@ -86,25 +86,27 @@ spec:
             }
         }
         stage('Deploy') {
-            def remote = [:]
-            remote.name = 'octo'
-            remote.host = 'octo'
-            remote.user = $ssh_cred_USR
-            remote.password = $ssh_cred_PSW
-            remote.allowAnyHosts = true
+            script{
+                def remote = [:]
+                remote.name = 'octo'
+                remote.host = 'octo'
+                remote.user = $ssh_cred_USR
+                remote.password = $ssh_cred_PSW
+                remote.allowAnyHosts = true
             writeFile file: 'create_home_page.yaml', text: "\
 apiVersion: v1\
 kind: Pod\
 metadata:\
-   name: home-page\
+name: home-page\
 spec:\
-   containers:\
-   - name: home-page\
-     image: $IMAGE_NAME:$IMAGE_TAG\
-     ports:\
-     - containerPort: 8000\
+containers:\
+- name: home-page\
+    image: $IMAGE_NAME:$IMAGE_TAG\
+    ports:\
+    - containerPort: 8000\
 "
-            sshCommand remote: remote, command: "kubectl create -f create_home_page.yaml"
+                sshCommand remote: remote, command: "kubectl create -f create_home_page.yaml"
+            }
         }
     }
 
