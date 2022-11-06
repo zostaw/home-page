@@ -8,6 +8,7 @@ pipeline {
         IMAGE_NAME = "zostaw/home-page"
         IMAGE_TAG = "python-app-1.0"
         dockerhub = credentials("dockerhub")
+        SSH_KEY = credentials("file_octojenkssh")
     }
     agent {
         kubernetes {
@@ -79,16 +80,29 @@ spec:
                     sh 'pwd'
                     sh 'ls -las'
                     sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+                    sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
+                    sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'
                 }
             }
         }
         stage('Deploy') {
             steps {
-                container("docker"){
-                    echo 'Deploying....'
-                    sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
-                    sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'
-                }
+                ssh -o StrictHostKeyChecking=no -i $SSH_KEY zostaw@octo "
+                    cd home-page
+                    cat <<EOF > create_home_page.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+   name: home-page
+spec:
+   containers:
+   - name: home-page
+     image: $IMAGE_NAME:$IMAGE_TAG
+     ports:
+     - containerPort: 8000
+EOF
+                    kubectl create -f create_home_page.yaml
+                "
             }
         }
     }
