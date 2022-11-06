@@ -30,10 +30,6 @@ spec:
     - sleep
     args:
     - infinity
-  - name: docker
-    image: docker:20.10.21-alpine3.16
-    command:
-    - cat
     tty: true
     volumeMounts:
       - mountPath: /var/run/docker.sock
@@ -70,13 +66,11 @@ spec:
         stage('Build') {
             steps {
                 echo 'Building..'
-                container('docker') {
                     sh 'hostname'
                     sh 'pwd'
                     sh 'ls -las'
                     sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
                 }
-}
         }
         stage('Deploy') {
             steps {
