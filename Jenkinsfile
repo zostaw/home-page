@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "zostaw/home-page"
-        IMAGE_TAG = "python-app-1.0"
+        IMAGE_TAG = "python-app-1.0.0"
         dockerhub = credentials("dockerhub")
         sshkey = credentials("file_octojenkssh")
     }
