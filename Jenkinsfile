@@ -8,7 +8,7 @@ pipeline {
         IMAGE_NAME = "zostaw/home-page"
         IMAGE_TAG = "python-app-1.0"
         dockerhub = credentials("dockerhub")
-        SSH_KEY = credentials("file_octojenkssh")
+        ssh_cred = credentials("octojenkssh")
     }
     agent {
         kubernetes {
@@ -85,25 +85,26 @@ spec:
                 }
             }
         }
+        def remote = [:]
+        remote.name = 'octo'
+        remote.host = 'octo'
+        remote.user = $ssh_cred_USR
+        remote.password = $ssh_cred_PSW
+        remote.allowAnyHosts = true
         stage('Deploy') {
-            steps {
-                ssh -o StrictHostKeyChecking=no -i $SSH_KEY zostaw@octo "
-                    cd home-page
-                    cat <<EOF > create_home_page.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-   name: home-page
-spec:
-   containers:
-   - name: home-page
-     image: $IMAGE_NAME:$IMAGE_TAG
-     ports:
-     - containerPort: 8000
-EOF
-                    kubectl create -f create_home_page.yaml
-                "
-            }
+            writeFile file: 'create_home_page.yaml', text: "\
+apiVersion: v1\
+kind: Pod\
+metadata:\
+   name: home-page\
+spec:\
+   containers:\
+   - name: home-page\
+     image: $IMAGE_NAME:$IMAGE_TAG\
+     ports:\
+     - containerPort: 8000\
+"
+            sshCommand remote: remote, command: "kubectl create -f create_home_page.yaml"
         }
     }
 
