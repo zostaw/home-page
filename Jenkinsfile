@@ -24,7 +24,7 @@ kind: Pod
 spec:
   containers:
   - name: shell
-    image: clearlinux/numpy-mp
+    image: zostaw:python-numpy-1.0
     command:
     - sleep
     args:
