@@ -106,7 +106,7 @@ spec:
   - name: home-page
     image: $IMAGE_NAME:$IMAGE_TAG
     ports:
-    - containerPort: 8000
+    - containerPort: 33000
 "
 '''
                     sh 'ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "/usr/bin/microk8s kubectl apply -f ./create_home_page.yaml"'
