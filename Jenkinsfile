@@ -86,6 +86,7 @@ spec:
             }
         }
         stage('Deploy') {
+            steps{
             script{
                 def remote = [:]
                 remote.name = 'octo'
@@ -106,6 +107,7 @@ containers:\
     - containerPort: 8000\
 "
                 sshCommand remote: remote, command: "kubectl create -f create_home_page.yaml"
+            }
             }
         }
     }
