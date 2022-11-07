@@ -42,4 +42,4 @@ ENV PYTHONPATH=/app
 # Run the start script provided by the parent image tiangolo/uwsgi-nginx.
 # It will check for an /app/prestart.sh script (e.g. for migrations)
 # And then will start Supervisor, which in turn will start Nginx and uWSGI
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "wsgi:app", "--timeout", "90"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8080"]
