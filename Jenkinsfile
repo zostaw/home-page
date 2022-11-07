@@ -101,6 +101,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: home-page
+  namespace: default
+  labels:
+    app.kubernetes.io/name: home-page
 spec:
   containers:
   - name: home-page
