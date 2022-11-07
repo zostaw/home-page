@@ -107,8 +107,8 @@ if __name__ == "__main__":
         templates_dir=os.path.join(".", "app/templates"),
         blogs_dir=os.path.join(".", "app/templates/blog"),
         app_name="app",
-        server_mode="prod",
-        port_number=8000,
+        server_mode="dev",
+        port_number=8080,
     )
 
     cmd = sys.argv[1]
