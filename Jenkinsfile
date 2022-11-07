@@ -96,7 +96,7 @@ spec:
                   container('ssh'){
                     sh 'cat ${sshkey} > /tmp/secret && chmod 0600 /tmp/secret'
                     sh '''ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "
-cat <<EOF > ./create_home_page.yaml
+cat <<EOF > /tmp/pod_home_page.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -106,10 +106,28 @@ spec:
   - name: home-page
     image: $IMAGE_NAME:$IMAGE_TAG
     ports:
-    - containerPort: 33000
-"
-'''
-                    sh 'ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "/usr/bin/microk8s kubectl apply -f ./create_home_page.yaml"'
+    - containerPort: 8080
+EOF
+cat <<EOF > /tmp/service_home_page.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-page
+  namespace: default
+  labels:
+    app.kubernetes.io/name: home-page
+spec:
+  selector:
+    app.kubernetes.io/name: home-page
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000
+EOF
+/usr/bin/microk8s kubectl apply -f /tmp/pod_home_page.yaml
+/usr/bin/microk8s kubectl apply -f /tmp/service_home_page.yaml
+                    "'''
                 }
               }
         }
