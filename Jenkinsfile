@@ -67,6 +67,7 @@ spec:
             steps {
                 sh 'pwd'
                 sh 'ls -las'
+                sh 'git branch'
                 sh 'apk --update add bash vim g++ gcc musl-dev linux-headers'
                 sh 'pip install --upgrade pip'
                 sh 'pip install --no-cache-dir -r ./requirements.txt'
