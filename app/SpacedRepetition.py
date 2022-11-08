@@ -681,30 +681,30 @@ class SpacedRepetition:
 
 
 if __name__ == "__main__":
-    db = SpacedRepetition("learning_words", 7, 5)
+    # db = SpacedRepetition("learning_words", 7, 5)
 
-    # db.AddRecord("Oumi Janta", "If I can see you grove -- if you have fun -- I can see that you trully feel the music and feel the track -- And that makes you move much more beautiful", "")
+    # # db.AddRecord("Oumi Janta", "If I can see you grove -- if you have fun -- I can see that you trully feel the music and feel the track -- And that makes you move much more beautiful", "")
 
-    db.AddRecord("", "lasting for a very short time", "ephemeral")
+    # db.AddRecord("", "lasting for a very short time", "ephemeral")
 
-    db.AddRecord("", "atrakcyjny, uwodzący", "alluring, enticing, captivating")
+    # db.AddRecord("", "atrakcyjny, uwodzący", "alluring, enticing, captivating")
 
-    db.AddRecord("", "hipnotyzujący", "mesmerizing")
+    # db.AddRecord("", "hipnotyzujący", "mesmerizing")
 
-    db.AddRecord("", "niewypowiedziane, nieznane", "innefable")
+    # db.AddRecord("", "niewypowiedziane, nieznane", "innefable")
 
-    db.AddRecord("", "overwhelmingly fearful", "petrified")
+    # db.AddRecord("", "overwhelmingly fearful", "petrified")
 
-    db.AddRecord("", "a countless or extremally great number", "myriad")
+    # db.AddRecord("", "a countless or extremally great number", "myriad")
 
-    db.AddRecord(
-        "", "person showing ability to speak fluently and coherently", "articulate"
-    )
+    # db.AddRecord(
+    #     "", "person showing ability to speak fluently and coherently", "articulate"
+    # )
 
-    db.AddRecord(
-        "",
-        "nunchi",
-        "the subtle art and ability to listen and gauge others' moods, it means 'eye force/power'",
-    )
+    # db.AddRecord(
+    #     "",
+    #     "nunchi",
+    #     "the subtle art and ability to listen and gauge others' moods, it means 'eye force/power'",
+    # )
 
-    db.PlaySession()
+    # db.PlaySession()
