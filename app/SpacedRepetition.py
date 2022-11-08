@@ -681,6 +681,7 @@ class SpacedRepetition:
 
 
 if __name__ == "__main__":
+    print()
     # db = SpacedRepetition("learning_words", 7, 5)
 
     # # db.AddRecord("Oumi Janta", "If I can see you grove -- if you have fun -- I can see that you trully feel the music and feel the track -- And that makes you move much more beautiful", "")
