@@ -76,6 +76,10 @@ def spaced_repetition():
 def blog():
     return render_template("blog.html")
 
+@app.route("/mystory")
+def mystory():
+    return render_template("blog/mystory.html")
+
 
 @app.route("/drawing")
 def drawing():
