@@ -12,25 +12,25 @@
       <p>
       I'm a customer supporter in fintech company. Currently working as Senior Engineering Support Advisor at Finastra.
       </br>
-      My main focus is investigation of technical cases, communication and maintaining good relationships with clients, I also lead a small team which provides and maintains environments in CS department.
+      My main role is investigation of technical cases, communicating and providing support for clients, I also lead a small team which provides and maintains environments in CS department.
       </br>
-      Currently my learning is focused on becoming better at organizing my work and learn about the complexity of development processes.
+      Currently my learning is focused on becoming better at organizing my work and improving my knowledge and skills related to development processeses and new technologies.
       </br>
       I have a priviledge to work and learn from one of the kindest and wisest human beings in the world.
       </p>
-      <h3>Things I find most fascinating at work</h3>
+      <h3>Things I find most fascinating to contemplate at work</h3>
       <p>
-      - simplification and optimalization of the technical processes
+      - simplification and optimalization of technical processes
       </br>
       - role of harmony and conflict in service-oriented environments
       </br>
-      - role of human connection and communication between different groups in a goal oriented communities
+      - role of human connection and communication in goal-oriented communities
       </br>
-      - role of abstraction in programming and building systems
+      - role of abstraction in programming and system building
       </br>
       - role of creativity and individual initiative in improvement of organized groups
       </p>
-      <h3>Studies</h3>
+      <h3>Education</h3>
       <p>
       - (2012-2016) <b>BSc of Radiocommunication</b> at Faculty of Electronics, Telecommunications and Informatics at Gdansk University of Technology
       </br>
@@ -40,12 +40,20 @@
       <p>
       - studying and thinking deeply about social problems
       </br>
-      - learning about human nature <!-- human mind and psychology -->
+      - learning about psychology and human nature <!-- human mind and psychology -->
       </br>
-      - spending time with my dog #pictures#
+      - spending time with my dog - Kleo
       </br>
-      - rock climbing #add pictures from trips#
+      - rock climbing
       </br>
+      <td>
+        <tr>
+      <img id="Kleo2" src="static/images/Kleo2.jpeg" style="border-style: solid; border-width: 1px; width:49%;"  alt="Kleo" onclick="openModal();currentSlide(1)" class="hover-shadow">
+        </tr>
+          <tr>
+      <img id="climbing" src="static/images/climbing.jpeg" style="border-style: solid; border-width: 1px; width:49%;" alt="climbing pic by Ewa Janisz" onclick="openModal();currentSlide(2)" class="hover-shadow">
+          </tr>
+      </td>
       <!-- - sencha tea -->
       </p>
 
@@ -82,6 +90,74 @@
       - Secret of the Golder Flower (chineese book, comentary by Wilhelm and Jung)
       </p>
 
+
+
+      <div id="myModal" class="modal">
+
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content" id="img01">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+  <div class="mySlides">
+    <div class="numbertext">1 / 4</div>
+    <img src="static/images/Kleo2.jpeg"  style="max-height: 100vh;">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 4</div>
+    <img src="static/images/climbing.jpeg" style="max-height: 100vh;">
+  </div>
+
+  </div>
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+      </div>
+
+    </div>
+
+<script>
+function openModal() {
+document.getElementById("myModal").style.display = "block";
+}
+
+// Close the Modal
+function closeModal() {
+document.getElementById("myModal").style.display = "none";
+}
+
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+
+function currentSlide(n) {
+showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+var i;
+var slides = document.getElementsByClassName("mySlides");
+var captionText = document.getElementById("caption");
+if (n > slides.length) {slideIndex = 1}
+if (n < 1) {slideIndex = slides.length}
+for (i = 0; i < slides.length; i++) {
+  slides[i].style.display = "none";
+}
+slides[slideIndex-1].style.display = "block";
+}
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+modal.style.display = "none";
+}
+</script>
 
 
 {% endblock %}

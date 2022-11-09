@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- <hr class="divider"> -->
 
@@ -16,28 +17,32 @@
       <h3>- Learning</h3>
 
       <div class="projects-paragraph">
-        <a href="https://github.com/zostaw/home-page">This page</a> - source code of this page. During this project I learned basics of flask, html and css, as well as CI/CD processes - I built a Jenkins pipeline that loads this repository from github, builds a docker image and deploys on my kubernetes cluster. </br>
-        You can find the code on github and even deploy in your docker/k8s.</br>
-        #python #jenkins #k8s #flask #html #css #docker #github
+        <a href="https://github.com/zostaw/home-page">This page <i class="fa fa-github"></i></a> - This page you are reading right now! </br>
+
+        <b>What I learned:</b> basics of flask, html and css, as well as CI/CD processes - I built a Jenkins pipeline that loads this repository from github, builds a docker image and deploys in my kubernetes cluster.
+        You can find the code on github and even deploy in your docker/k8s by pulling dockerhub image.</br>
+        #python #jenkins #k8s #flask #html #css #docker #github </br>
+
             </div>
 
       <div class="projects-paragraph">
-        <a href="https://github.com/zostaw/learning_ansible_microk8s">Building microk8s cluster with ansible</a> - my learning playbooks for installation of snap, microk8s and forming a k8s cluster from ubuntu/centos servers.</br>
-        During the project I learned about the basics of ansible: the structure - inventory, playbooks, roles - as well as some of the important things one should consider when generalizing a process.</br>
+        <a href="https://github.com/zostaw/learning_ansible_microk8s">Building microk8s cluster with ansible <i class="fa fa-github"></i></a> - my playbooks for installation of snap, microk8s and forming a k8s cluster from ubuntu/centos servers.</br>
+
+        <b>What I learned:</b> the basics of ansible: the structure - inventory, playbooks, roles - as well as some of the important things one should consider when generalizing a process.</br>
         For example that there are some common elements for multiple entities, but some have different alternatives and the beauty of it is that one can build something, make it complete by abstracting away all the parts of it. </br>
         By understanding all the parts, one can better understand how all of it connects together into a harmonious process.</br>
-        #ansible #kvm #qemu #unix #k8s
+        #ansible #kvm #qemu #unix #k8s</br>
             </div>
 
       <div class="projects-paragraph">
-	<a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition</a> - a simple program that implements a spaced repetition tool for learning, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a> .</br>
-  #python #javascript
+	<a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition <i class="fa fa-github"></i></a> - a simple program that implements a spaced repetition tool for learning, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a> .</br>
+  #python #javascript</br>
 
 
       </div>
       <div class="projects-paragraph">
-	<a href="https://github.com/zostaw/treePrinter">Tree Schema Printer</a> - the program is drawing a polar plot of tree graphs, it assigns the positions of the nodes based on their spread size. I enjoyed this project particularly, because it had no sense, no purpose other than exploration, building intuitions on mathematical concept and learning basics about programming language.</br>
-#python
+	<a href="https://github.com/zostaw/treePrinter">Tree Schema Printer <i class="fa fa-github"></i></a> - the program is drawing a polar plot of tree graphs, it assigns the positions of the nodes based on their spread size. I enjoyed this project particularly, because it had no sense, no purpose other than exploration, building intuitions on mathematical concept and learning basics about programming language.</br>
+#python</br>
 	</br>
 	<td>
 		<tr>

@@ -128,10 +128,30 @@ nav-li {
     /*border-bottom:2px solid #0f0f0f;*/
 }
 
+/* index.html */
+button.link {
+    background:none;
+    border:none;
+    font-family: "Source Sans Pro";
+    font-weight: 300;
+    font-size: medium;
+}
+/* end index.html */
+
+/* projects.html */
 .projects-paragraph {
     margin:10px;
-    border-bottom: 2px;
+    padding: 5px
 }
+
+.projects-paragraph a {
+    text-decoration: none;
+    background-color: var(--nav-bg);
+    color: var(--flashy);
+    font-weight: 600;
+}
+
+/* end projects */
 
 /* navigation */
 a {
