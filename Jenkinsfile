@@ -97,6 +97,7 @@ spec:
   containers:
   - name: home-page-tst
     image: $IMAGE_NAME:$IMAGE_TAG
+    imagePullPolicy: Always
     ports:
     - containerPort: 8080
 EOF
