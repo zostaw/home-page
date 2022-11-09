@@ -6,20 +6,12 @@ pipeline {
 
     environment {
         IMAGE_NAME = "zostaw/home-page"
-        IMAGE_TAG = "tst-1.0.0"
+        IMAGE_TAG = "tst-1.0.1"
         dockerhub = credentials("dockerhub")
         sshkey = credentials("file_octojenkssh")
     }
     agent {
         kubernetes {
-            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
-            // Or, to avoid YAML:
-            // containerTemplate {
-            //     name 'shell'
-            //     image 'ubuntu'
-            //     command 'sleep'
-            //     args 'infinity'
-            // }
             yaml '''
 apiVersion: v1
 kind: Pod
@@ -54,10 +46,6 @@ spec:
     hostPath:
       path: /var/run/docker.sock
 '''
-            // Can also wrap individual steps:
-            // container('shell') {
-            //     sh 'hostname'
-            // }
             defaultContainer 'shell'
         }
     }
@@ -76,6 +64,9 @@ spec:
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh 'hostname'
+                sh 'pwd'
+                sh 'ls -las'
                 sh 'python HomePage.py start &'
             }
         }
@@ -83,9 +74,6 @@ spec:
             steps {
                 echo 'Building..'
                 container("docker"){
-                    sh 'hostname'
-                    sh 'pwd'
-                    sh 'ls -las'
                     sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
                     sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
                     sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'

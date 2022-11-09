@@ -2,101 +2,71 @@
 
 This is source code for my personal home page.
 
-It does not keep track of venv, so requirements.txt must be updated accordingly.
+It is deployed as docker image and it runs by default on port 8080.
+
+In below instruction, the following $IMAGE_NAME:$IMAGE_TAG refers to docker image you'll be using, you MUST replace it with correct image version.
+Simply replace "$IMAGE_NAME:$IMAGE_TAG" below with "zostaw/home-page:app-1.0.1".
 
 ## PREREQUISITES
 
-- python 3.10.5
+- docker
 
 ## INSTALLATION
 
-1. go to parent directory for your project. In example, home directory is used (new directory "home-page" will be created inside).
-
 ```bash
-cd ~/
+docker pull $IMAGE_NAME:$IMAGE_TAG
 ```
-
-2. initiate local repo and load this project
-
-```bash
-git clone git@github.com:zostaw/home-page.git
-```
-
-3. prepare python virtualenv
-
-3.1 install
-There are multiple options, I present below 2 most common.
-
-a) simpliest to install, but more difficult to update:
-
-```bash
-python3 -m venv venv
-```
-
-b) suggested option - download pyenv - it is a little bit longer for the first time, but once it is installed, managing multiple python versions and virtualenvs comes with much more comfort - see installation guide under https://www.linuxtut.com/en/c8b82ab42564256df884/
-Once pyenv is installed, execute:
-
-```bash
-# install python version in pyenv
-pyenv install 3.10.5
-# create venv for your project
-pyenv virtualenv 3.10.5 home-page
-# list all pyenv virtualenvs
-pyenv activate home-page
-# activate for your python project
-pyenv local home-page
-```
-
-That prepared virtualenv will stick with the directory and it is simple to change versions.
-
-3.2. install python requirements
-
-a) simple option - one must execute this command everytime he enters
-
-activate venv:
-
-```bash
-. venv/bin/activate
-```
-
-install required pip packages:
-
-```bash
-pip install --no-cache-dir -r ./requirements.txt
-```
-
-b) suggested option - with pyenv:
-
-install required pip packages (activation is not required at this point, as long as you entered the home-page directory)
-
-```bash
-pip install --no-cache-dir -r ./requirements.txt
-```
-
-## UPGRADE
-
-1. pull new version of home-page
-
-```bash
-git pull
-```
-
-2. update python venv (if changed)
-
-Here you can find suggestions for version change with pyenv: https://www.linuxtut.com/en/c8b82ab42564256df884/
-
-3. update packages in your venv
-
-```bash
-pip install --no-cache-dir -r ./requirements.txt
-```
-
-4. restart server - see START section
 
 ## START
 
-Start server in production mode:
+### docker
 
 ```bash
-python HomePage.py start
+docker run --name=home-page $IMAGE_NAME:$IMAGE_TAG
+```
+
+or to adjust port number:
+
+```bash
+docker run --name=home-page -p 8080:<your port> $IMAGE_NAME:$IMAGE_TAG
+```
+
+## kubernetes
+
+1. create pod-home-page.yaml
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: home-page
+  namespace: default
+  labels:
+    app.kubernetes.io/name: home-page
+spec:
+  containers:
+  - name: home-page
+    image: $IMAGE_NAME:$IMAGE_TAG
+    ports:
+    - containerPort: 8080
+```
+
+2. create service-home-page.yaml to expose pod outside cluster
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-page
+  namespace: default
+  labels:
+    app.kubernetes.io/name: home-page
+spec:
+  selector:
+    app.kubernetes.io/name: home-page
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: <your port>
 ```

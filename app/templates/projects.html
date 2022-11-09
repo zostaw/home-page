@@ -12,16 +12,32 @@
       <h1 style="font-size: 25px; text-align: center;">Projects</h1>
 
 
-      <h2>Python</h2>
+      <h2>Programming</h2>
       <h3>- Learning</h3>
+
       <div class="projects-paragraph">
-	<a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition</a> - a simple program that implements a spaced repetition tool for learning, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a> .
+        <a href="https://github.com/zostaw/home-page">This page</a> - source code of this page. During this project I learned basics of flask, html and css, as well as CI/CD processes - I built a Jenkins pipeline that loads this repository from github, builds a docker image and deploys on my kubernetes cluster. </br>
+        You can find the code on github and even deploy in your docker/k8s.</br>
+        #python #jenkins #k8s #flask #html #css #docker #github
+            </div>
+
+      <div class="projects-paragraph">
+        <a href="https://github.com/zostaw/learning_ansible_microk8s">Building microk8s cluster with ansible</a> - my learning playbooks for installation of snap, microk8s and forming a k8s cluster from ubuntu/centos servers.</br>
+        During the project I learned about the basics of ansible: the structure - inventory, playbooks, roles - as well as some of the important things one should consider when generalizing a process.</br>
+        For example that there are some common elements for multiple entities, but some have different alternatives and the beauty of it is that one can build something, make it complete by abstracting away all the parts of it. </br>
+        By understanding all the parts, one can better understand how all of it connects together into a harmonious process.</br>
+        #ansible #kvm #qemu #unix #k8s
+            </div>
+
+      <div class="projects-paragraph">
+	<a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition</a> - a simple program that implements a spaced repetition tool for learning, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a> .</br>
+  #python #javascript
 
 
       </div>
       <div class="projects-paragraph">
-	<a href="https://github.com/zostaw/treePrinter">Tree Schema Printer</a> - the program is drawing a polar plot of tree graphs, it assigns the positions of the nodes based on their spread size. I enjoyed this project particularly as it had no sense, no purpose other than exploration, building intuitions on mathematical concept and learning basics about programming language.
-
+	<a href="https://github.com/zostaw/treePrinter">Tree Schema Printer</a> - the program is drawing a polar plot of tree graphs, it assigns the positions of the nodes based on their spread size. I enjoyed this project particularly, because it had no sense, no purpose other than exploration, building intuitions on mathematical concept and learning basics about programming language.</br>
+#python
 	</br>
 	<td>
 		<tr>
@@ -33,10 +49,10 @@
 	</td>
 	<!-- The Modal -->
         <div id="myModal" class="modal">
-        
+
           <!-- The Close Button -->
           <span class="close">&times;</span>
-        
+
           <!-- Modal Content (The Image) -->
           <img class="modal-content" id="img01">
 	  <span class="close cursor" onclick="closeModal()">&times;</span>
@@ -50,7 +66,7 @@
       <div class="numbertext">2 / 4</div>
       <img src="static/images/beautiful4.png" style="max-height: 100vh;">
     </div>
-        
+
     </div>
           <!-- Modal Caption (Image Text) -->
           <div id="caption"></div>
@@ -96,7 +112,7 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
-} 
+}
 </script>
 
 

@@ -25,16 +25,6 @@ def about():
 ###### projects section - start ######
 
 
-@app.route("/process_test", methods=["GET", "POST"])
-def process_test():
-    print("process_test")
-    if request.method == "POST":
-        qtc_data = request.get_json()
-        print(qtc_data)
-        results = {"processed": "true"}
-        return jsonify(results)
-
-
 @app.route("/sr_get_all_boxes", methods=["POST"])
 def sr_get_all_boxes():
     # Returns rank 3 tensor:
@@ -87,11 +77,6 @@ def blog():
     return render_template("blog.html")
 
 
-@app.route("/mystory")
-def mystory():
-    return render_template("blog/mystory.html")
-
-
 @app.route("/drawing")
 def drawing():
     return render_template("blog/drawing.html")
@@ -99,10 +84,6 @@ def drawing():
 
 ###### blogs section - end ######
 
-
-@app.route("/test")
-def test():
-    return render_template("test.html")
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0")

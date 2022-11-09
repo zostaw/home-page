@@ -30,7 +30,7 @@ class HomePage:
         blogs_dir,
         app_name="app",
         server_mode="prod",
-        port_number=8000,
+        port_number=8080,
     ):
         self.css_dir = css_dir
         self.js_dir = js_dir
