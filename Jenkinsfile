@@ -118,8 +118,8 @@ spec:
       targetPort: 8080
       nodePort: 30000
 EOF
-/usr/bin/microk8s kubectl apply -f /tmp/pod_home_page.yaml
-/usr/bin/microk8s kubectl apply -f /tmp/service_home_page.yaml
+/usr/bin/microk8s kubectl replace --force -f /tmp/pod_home_page.yaml
+/usr/bin/microk8s kubectl replace --force -f /tmp/service_home_page.yaml
                     "'''
                 }
               }
