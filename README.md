@@ -47,6 +47,7 @@ spec:
   containers:
   - name: home-page
     image: $IMAGE_NAME:$IMAGE_TAG
+    imagePullPolicy: Always
     ports:
     - containerPort: 8080
 ```

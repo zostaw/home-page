@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "zostaw/home-page"
-        IMAGE_TAG = "tst-1.0.1"
+        IMAGE_TAG = "app-1.0.1"
         dockerhub = credentials("dockerhub")
         sshkey = credentials("file_octojenkssh")
     }
@@ -85,41 +85,41 @@ spec:
                   container('ssh'){
                     sh 'cat ${sshkey} > /tmp/secret && chmod 0600 /tmp/secret'
                     sh '''ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "
-cat <<EOF > /tmp/pod_home_page_tst.yaml
+cat <<EOF > /tmp/pod_home_page.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: home-page-tst
+  name: home-page
   namespace: default
   labels:
-    app.kubernetes.io/name: home-page-tst
+    app.kubernetes.io/name: home-page
 spec:
   containers:
-  - name: home-page-tst
+  - name: home-page
     image: $IMAGE_NAME:$IMAGE_TAG
     imagePullPolicy: Always
     ports:
     - containerPort: 8080
 EOF
-cat <<EOF > /tmp/service_home_page_tst.yaml
+cat <<EOF > /tmp/service_home_page.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: home-page-tst
+  name: home-page
   namespace: default
   labels:
-    app.kubernetes.io/name: home-page-tst
+    app.kubernetes.io/name: home-page
 spec:
   selector:
-    app.kubernetes.io/name: home-page-tst
+    app.kubernetes.io/name: home-page
   type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30001
+      nodePort: 30000
 EOF
-/usr/bin/microk8s kubectl replace --force -f /tmp/pod_home_page_tst.yaml
-/usr/bin/microk8s kubectl replace --force -f /tmp/service_home_page_tst.yaml
+/usr/bin/microk8s kubectl apply -f /tmp/pod_home_page.yaml
+/usr/bin/microk8s kubectl apply -f /tmp/service_home_page.yaml
                     "'''
                 }
               }
