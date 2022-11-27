@@ -1,3 +1,3 @@
 [submodule "app/spaced_repetition"]
 	path = app/spaced_repetition
-	url = https://github.com/zostaw/spaced_repetition.git
+	url = git@github.com:zostaw/spaced_repetition.git
