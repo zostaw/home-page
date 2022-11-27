@@ -14,7 +14,7 @@ Simply replace "$IMAGE_NAME:$IMAGE_TAG" below with "zostaw/home-page:app-1.0.1".
 ## INSTALLATION
 
 ```bash
-docker pull $IMAGE_NAME:$IMAGE_TAG
+docker build -t $IMAGE_NAME:$IMAGE_TAG .
 ```
 
 ## START
@@ -25,49 +25,43 @@ docker pull $IMAGE_NAME:$IMAGE_TAG
 docker run --name=home-page $IMAGE_NAME:$IMAGE_TAG
 ```
 
-or to adjust port number:
-
-```bash
-docker run --name=home-page -p 8080:<your port> $IMAGE_NAME:$IMAGE_TAG
-```
-
-## kubernetes
+### kubernetes
 
 1. create pod-home-page.yaml
 
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: home-page
-  namespace: default
-  labels:
-    app.kubernetes.io/name: home-page
-spec:
-  containers:
-  - name: home-page
-    image: $IMAGE_NAME:$IMAGE_TAG
-    imagePullPolicy: Always
-    ports:
-    - containerPort: 8080
-```
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: home-page
+      namespace: default
+      labels:
+        app.kubernetes.io/name: home-page
+    spec:
+      containers:
+      - name: home-page
+        image: $IMAGE_NAME:$IMAGE_TAG
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+    ```
 
 2. create service-home-page.yaml to expose pod outside cluster
 
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: home-page
-  namespace: default
-  labels:
-    app.kubernetes.io/name: home-page
-spec:
-  selector:
-    app.kubernetes.io/name: home-page
-  type: NodePort
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: <your port>
-```
+    ```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: home-page
+      namespace: default
+      labels:
+        app.kubernetes.io/name: home-page
+    spec:
+      selector:
+        app.kubernetes.io/name: home-page
+      type: NodePort
+      ports:
+        - port: 8080
+          targetPort: 8080
+          nodePort: <your port>
+    ```

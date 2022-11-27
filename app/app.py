@@ -5,9 +5,9 @@ mimetypes.add_type("image/svg+xml", ".svg")
 
 app = Flask(__name__)
 
-from SpacedRepetition.SpacedRepetition import SpacedRepetition
+from spaced_repetition.SpacedRepetition import SpacedRepetition
 
-db = SpacedRepetition("learning_words", 7, 5)
+sr = SpacedRepetition()
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -36,7 +36,7 @@ def sr_get_all_boxes():
     rec_request = request.get_json()
     print("request: " + str(rec_request))
 
-    boxes_list = db.ReturnAllBoxes()
+    boxes_list = sr.ReturnAllBoxes()
 
     return jsonify(boxes_list)
 
@@ -46,7 +46,7 @@ def sr_get_all_boxes():
 def sr_get_records():
     output = request.get_json()
 
-    records_list = db.ReturnAllRecords()
+    records_list = sr.ReturnAllRecords()
     print(records_list)
     dict = {}
     dict["name"] = records_list[1]
