@@ -28,7 +28,6 @@ ENV STATIC_INDEX 0
 # Add app
 COPY ./app /app
 WORKDIR /app
-COPY ./app/SpacedRepetition/learning_words /app/
 
 # Make /app/* available to be imported by Python globally to better support several use cases like Alembic migrations.
 ENV PYTHONPATH=/app

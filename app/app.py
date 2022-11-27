@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 from spaced_repetition.SpacedRepetition import SpacedRepetition
 
-sr = SpacedRepetition()
+sr = SpacedRepetition(dataset_name="test_quotes")
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -33,6 +33,7 @@ def sr_get_all_boxes():
     # 2D: value: 0 - Id, 1 - Name, 2 - Visible value/question, 3 - Hidden value/Answer, 4 - "Is in use", 5 - "Days in boxes"
     # For example: boxes_list[2][1][3] is record from 2 (starting from 0) box, 1 record, 3 value: Answer
 
+    sr.EoD_Rotation()
     rec_request = request.get_json()
     print("request: " + str(rec_request))
 
@@ -45,6 +46,8 @@ def sr_get_all_boxes():
 @app.route("/sr_get_records", methods=["POST"])
 def sr_get_records():
     output = request.get_json()
+
+    sr.EoD_Rotation()
 
     records_list = sr.ReturnAllRecords()
     print(records_list)
