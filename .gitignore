@@ -9,6 +9,7 @@ app/templates/includes/header.html.old
 app/SpacedRepetition_back
 .python-version
 flask.out
+.devcontainer
 
 
 # below are common python ignore lists
