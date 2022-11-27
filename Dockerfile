@@ -1,5 +1,7 @@
 FROM zostaw/numpy:python-numpy-1.0
 
+EXPOSE 8080
+
 RUN apk --update add bash vim g++ gcc musl-dev linux-headers
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
@@ -26,7 +28,7 @@ ENV STATIC_INDEX 0
 # Add app
 COPY ./app /app
 WORKDIR /app
-COPY ./learning_words /app/
+COPY ./app/SpacedRepetition/learning_words /app/
 
 # Make /app/* available to be imported by Python globally to better support several use cases like Alembic migrations.
 ENV PYTHONPATH=/app

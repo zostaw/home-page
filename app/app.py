@@ -5,7 +5,7 @@ mimetypes.add_type("image/svg+xml", ".svg")
 
 app = Flask(__name__)
 
-from SpacedRepetition import SpacedRepetition
+from SpacedRepetition.SpacedRepetition import SpacedRepetition
 
 db = SpacedRepetition("learning_words", 7, 5)
 
@@ -75,6 +75,7 @@ def spaced_repetition():
 @app.route("/blog")
 def blog():
     return render_template("blog.html")
+
 
 @app.route("/mystory")
 def mystory():
