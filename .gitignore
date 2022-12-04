@@ -1,12 +1,6 @@
 # below is defined my custom list
 venv/
 dev/
-start-local
-app/templates/about.html.back
-app/static/css/baseline.css.back
-app/static/css/layout.css.back
-app/templates/includes/header.html.old
-app/SpacedRepetition_back
 .python-version
 flask.out
 .devcontainer

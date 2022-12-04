@@ -69,7 +69,7 @@ def spaced_repetition():
     # import SpacedRepetition from SpacedRepetition
     # a=get_records()
 
-    return render_template("spaced_repetition.html")
+    return render_template("projects/spaced_repetition.html")
 
 
 ###### projects section - start ######
