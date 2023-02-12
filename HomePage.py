@@ -29,17 +29,15 @@ class HomePage:
         images_dir,
         templates_dir,
         blogs_dir,
-        app_name="app",
-        server_mode="prod",
-        port_number=8080,
         ssl_mode="https",
+        server_mode="dev",
+        port_number=443,
     ):
         self.css_dir = css_dir
         self.js_dir = js_dir
         self.images_dir = images_dir
         self.templates_dir = templates_dir
         self.blogs_dir = blogs_dir
-        self.app_name = app_name
         self.server_mode = server_mode
         self.port_number = port_number
         self.ssl_mode = ssl_mode
@@ -90,12 +88,10 @@ class HomePage:
             f"0.0.0.0:{str(self.port_number)}",
             "--chdir",
             f"{working_dir}/app",
-            f"wsgi:{self.app_name}",
+            f"wsgi:app",
             ]
 
-        print(self.ssl_mode)
         if self.ssl_mode == "https":
-            print(self.ssl_mode)
             FLASK_CMD.append(f"--cert=app/{self.SSL_CERT['cert']}")
             FLASK_CMD.append(f"--key=app/{self.SSL_CERT['key']}")
             WSGI_CMD.append("--certfile")
@@ -123,24 +119,26 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument('cmd')
     parser.add_argument("--ssl_mode", dest="ssl_mode",
-                        help="switch https mode http/https", default="https")
+                        help="switch https mode [http/https]", default="https")
+    parser.add_argument("--server_mode", dest="server_mode",
+                        help="switch between flask (dev) and wsgi (prod) [dev/prod]", default="dev")
+    parser.add_argument("--port", dest="port_number",
+                        help="set port", default=443)
 
     args = parser.parse_args()
 
     if args.cmd not in {"make", "start", "stop"}:
         raise ValueError("Must provide option: 'make'/'start'/'stop'")
 
-    print(args.ssl_mode)
     HomePage = HomePage(
         css_dir=os.path.join(".", "app/static/css"),
         js_dir=os.path.join(".", "app/static/js"),
         images_dir=os.path.join(".", "app/static/images"),
         templates_dir=os.path.join(".", "app/templates"),
         blogs_dir=os.path.join(".", "app/templates/blog"),
-        app_name="app",
-        server_mode="prod",
-        ssl_mode = args.ssl_mode,
-        port_number=8080,
+        ssl_mode=args.ssl_mode,
+        server_mode=args.server_mode,
+        port_number=int(args.port_number),
     )
 
 
