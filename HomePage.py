@@ -14,6 +14,7 @@ Dependencies:
 from ast import Raise
 from genericpath import isfile
 import os, sys, subprocess
+from argparse import ArgumentParser
 from psutil import process_iter
 from signal import SIGTERM  # or SIGKILL
 from subprocess import Popen
@@ -31,6 +32,7 @@ class HomePage:
         app_name="app",
         server_mode="prod",
         port_number=8080,
+        ssl_mode="https",
     ):
         self.css_dir = css_dir
         self.js_dir = js_dir
@@ -40,9 +42,12 @@ class HomePage:
         self.app_name = app_name
         self.server_mode = server_mode
         self.port_number = port_number
+        self.ssl_mode = ssl_mode
 
-    def make(self):
-        pass
+        self.SSL_CERT={
+            "cert": "cert.pem", 
+            "key": "key.pem"
+            }
 
     def stop(self):
         # read lsof output for server port_number
@@ -70,6 +75,34 @@ class HomePage:
             )
         working_dir = os.path.dirname(os.path.realpath(__file__))
 
+        FLASK_CMD = [
+            "flask",
+            "run",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            f"{str(self.port_number)}",
+            ]
+
+        WSGI_CMD=[
+            "gunicorn",
+            "--bind",
+            f"0.0.0.0:{str(self.port_number)}",
+            "--chdir",
+            f"{working_dir}/app",
+            f"wsgi:{self.app_name}",
+            ]
+
+        print(self.ssl_mode)
+        if self.ssl_mode == "https":
+            print(self.ssl_mode)
+            FLASK_CMD.append(f"--cert=app/{self.SSL_CERT['cert']}")
+            FLASK_CMD.append(f"--key=app/{self.SSL_CERT['key']}")
+            WSGI_CMD.append("--certfile")
+            WSGI_CMD.append(f"{self.SSL_CERT['cert']}")
+            WSGI_CMD.append("--keyfile")
+            WSGI_CMD.append(f"{self.SSL_CERT['key']}")
+
         # cleanup after previous processes
         self.stop()
 
@@ -77,29 +110,27 @@ class HomePage:
         if self.server_mode == "dev":
             os.environ["FLASK_APP"] = "app/app"
             subprocess.run(
-                [
-                    "flask",
-                    "run",
-                    "--host",
-                    "0.0.0.0",
-                    "--port",
-                    f"{str(self.port_number)}",
-                ]
+                FLASK_CMD
             )
         elif self.server_mode == "prod":
             subprocess.run(
-                [
-                    "gunicorn",
-                    "--bind",
-                    f"0.0.0.0:{str(self.port_number)}",
-                    "--chdir",
-                    f"{working_dir}/app",
-                    f"wsgi:{self.app_name}",
-                ]
+                WSGI_CMD
             )
 
 
 if __name__ == "__main__":
+
+    parser = ArgumentParser()
+    parser.add_argument('cmd')
+    parser.add_argument("--ssl_mode", dest="ssl_mode",
+                        help="switch https mode http/https", default="https")
+
+    args = parser.parse_args()
+
+    if args.cmd not in {"make", "start", "stop"}:
+        raise ValueError("Must provide option: 'make'/'start'/'stop'")
+
+    print(args.ssl_mode)
     HomePage = HomePage(
         css_dir=os.path.join(".", "app/static/css"),
         js_dir=os.path.join(".", "app/static/js"),
@@ -107,18 +138,17 @@ if __name__ == "__main__":
         templates_dir=os.path.join(".", "app/templates"),
         blogs_dir=os.path.join(".", "app/templates/blog"),
         app_name="app",
-        server_mode="dev",
+        server_mode="prod",
+        ssl_mode = args.ssl_mode,
         port_number=8080,
     )
 
-    cmd = sys.argv[1]
 
-    if cmd not in {"make", "start", "stop"}:
-        raise ValueError("Must provide option: 'make'/'start'/'stop'")
 
-    if cmd == "make":
+    if args.cmd == "make":
         HomePage.make()
-    elif cmd == "start":
+    elif args.cmd == "start":
         HomePage.start()
-    elif cmd == "stop":
+    elif args.cmd == "stop":
         HomePage.stop()
+

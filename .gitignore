@@ -5,6 +5,10 @@ dev/
 flask.out
 .devcontainer
 compose-dev.yaml
+app/cert.pem
+app/key.pem
+cert.pem
+key.pem
 
 
 # below are common python ignore lists

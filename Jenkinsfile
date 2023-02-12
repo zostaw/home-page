@@ -84,7 +84,7 @@ spec:
               steps{
                   container('ssh'){
                     sh 'cat ${sshkey} > /tmp/secret && chmod 0600 /tmp/secret'
-                    sh '''ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.0.172 "
+                    sh '''ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.1.172 "
 cat <<EOF > /tmp/pod_home_page.yaml
 apiVersion: v1
 kind: Pod

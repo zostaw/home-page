@@ -13,19 +13,44 @@ Simply replace "$IMAGE_NAME:$IMAGE_TAG" below with "zostaw/home-page:app-1.0.1".
 
 ## INSTALLATION
 
-```bash
-docker build -t $IMAGE_NAME:$IMAGE_TAG .
+### Setup
+
+1. Pull submodules:
+
 ```
+git submodule init
+git submodule update
+```
+
+2. setup https
+
+    a. generate certificate (cert.pem, key.pem), for example (self-signed):
+    ```bash
+    openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+    ```
+
+    b. place in app directory:
+    ```bash
+    app/cert.pem
+    app/key.pem
+    ```
 
 ## START
 
-### docker
+### Standalone
 
 ```bash
+python HomePage.py start # optionally add "--ssl_mode=http"
+```
+
+### Docker
+
+```bash
+docker build -t $IMAGE_NAME:$IMAGE_TAG .
 docker run --name=home-page $IMAGE_NAME:$IMAGE_TAG
 ```
 
-### kubernetes
+### Kubernetes
 
 1. create pod-home-page.yaml
 
