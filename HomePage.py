@@ -29,10 +29,15 @@ class HomePage:
         images_dir,
         templates_dir,
         blogs_dir,
-        ssl_mode="https",
-        server_mode="dev",
-        port_number=443,
+        ssl_mode,
+        server_mode,
+        port_number,
     ):
+        """
+        ssl_mode: choose between "https" and "http"
+        server_mode: dev - flask, prod - wsgi
+        port_number: for https port should be 443, but it can be different with port redirect
+        """
         self.css_dir = css_dir
         self.js_dir = js_dir
         self.images_dir = images_dir
@@ -123,7 +128,7 @@ if __name__ == "__main__":
     parser.add_argument("--server_mode", dest="server_mode",
                         help="switch between flask (dev) and wsgi (prod) [dev/prod]", default="dev")
     parser.add_argument("--port", dest="port_number",
-                        help="set port", default=443)
+                        help="set port", default=8080)
 
     args = parser.parse_args()
 
