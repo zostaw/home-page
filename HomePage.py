@@ -47,10 +47,7 @@ class HomePage:
         self.port_number = port_number
         self.ssl_mode = ssl_mode
 
-        self.SSL_CERT={
-            "cert": "cert.pem", 
-            "key": "key.pem"
-            }
+        self.SSL_CERT = {"cert": "cert.pem", "key": "key.pem"}
 
     def stop(self):
         # read lsof output for server port_number
@@ -85,16 +82,16 @@ class HomePage:
             "0.0.0.0",
             "--port",
             f"{str(self.port_number)}",
-            ]
+        ]
 
-        WSGI_CMD=[
+        WSGI_CMD = [
             "gunicorn",
             "--bind",
             f"0.0.0.0:{str(self.port_number)}",
             "--chdir",
             f"{working_dir}/app",
             f"wsgi:app",
-            ]
+        ]
 
         if self.ssl_mode == "https":
             FLASK_CMD.append(f"--cert=app/{self.SSL_CERT['cert']}")
@@ -104,36 +101,40 @@ class HomePage:
             WSGI_CMD.append("--keyfile")
             WSGI_CMD.append(f"{self.SSL_CERT['key']}")
 
-        # cleanup after previous processes
-        self.stop()
-
         # start
         if self.server_mode == "dev":
             os.environ["FLASK_APP"] = "app/app"
-            subprocess.run(
-                FLASK_CMD
-            )
+            subprocess.run(FLASK_CMD)
         elif self.server_mode == "prod":
-            subprocess.run(
-                WSGI_CMD
-            )
+            subprocess.run(WSGI_CMD)
+
+    def restart(self):
+        self.stop()
+        self.start()
 
 
 if __name__ == "__main__":
 
     parser = ArgumentParser()
-    parser.add_argument('cmd')
-    parser.add_argument("--ssl_mode", dest="ssl_mode",
-                        help="switch https mode [http/https]", default="https")
-    parser.add_argument("--server_mode", dest="server_mode",
-                        help="switch between flask (dev) and wsgi (prod) [dev/prod]", default="dev")
-    parser.add_argument("--port", dest="port_number",
-                        help="set port", default=8080)
+    parser.add_argument("cmd")
+    parser.add_argument(
+        "--ssl_mode",
+        dest="ssl_mode",
+        help="switch https mode [http/https]",
+        default="https",
+    )
+    parser.add_argument(
+        "--server_mode",
+        dest="server_mode",
+        help="switch between flask (dev) and wsgi (prod) [dev/prod]",
+        default="dev",
+    )
+    parser.add_argument("--port", dest="port_number", help="set port", default=8080)
 
     args = parser.parse_args()
 
-    if args.cmd not in {"make", "start", "stop"}:
-        raise ValueError("Must provide option: 'make'/'start'/'stop'")
+    if args.cmd not in {"make", "start", "stop", "restart"}:
+        raise ValueError("Must provide option: 'make'/'start'/'stop'/'restart'")
 
     HomePage = HomePage(
         css_dir=os.path.join(".", "app/static/css"),
@@ -146,12 +147,12 @@ if __name__ == "__main__":
         port_number=int(args.port_number),
     )
 
-
-
     if args.cmd == "make":
         HomePage.make()
     elif args.cmd == "start":
         HomePage.start()
     elif args.cmd == "stop":
         HomePage.stop()
+    elif args.cmd == "restart":
+        HomePage.restart()
 
