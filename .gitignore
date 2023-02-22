@@ -9,6 +9,7 @@ app/cert.pem
 app/key.pem
 cert.pem
 key.pem
+docker_rebuild.sh
 
 
 # below are common python ignore lists

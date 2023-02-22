@@ -4,9 +4,6 @@ This is source code for my personal home page.
 
 It is deployed as docker image and it runs by default on port 8080.
 
-In below instruction, the following $IMAGE_NAME:$IMAGE_TAG refers to docker image you'll be using, you MUST replace it with correct image version.
-Simply replace "$IMAGE_NAME:$IMAGE_TAG" below with "zostaw/home-page:app-1.0.1".
-
 ## PREREQUISITES
 
 - docker
@@ -45,9 +42,11 @@ python HomePage.py start # optionally add "--ssl_mode=http"
 
 ### Docker
 
-```bash
+```bash"
+IMAGE_NAME="zostaw/home-page"
+IMAGE_TAG="app-1.0.1"
 docker build -t $IMAGE_NAME:$IMAGE_TAG .
-docker run --name=home-page $IMAGE_NAME:$IMAGE_TAG
+docker run -d --restart unless-stopped -p 8080:8080 --name=home-page $IMAGE_NAME:$IMAGE_TAG
 ```
 
 ### Kubernetes
