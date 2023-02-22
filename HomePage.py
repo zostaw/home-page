@@ -1,10 +1,11 @@
 """
-Management tool for the home-page deployment.
+Management tool for the home-page deployment and testing.
 
 
 Usage:
-home-page.py make
-home-page.py start
+python HomePage.py start
+python HomePage.py stop
+python HomePage.py restart
 
 Dependencies:
 ---
@@ -36,7 +37,7 @@ class HomePage:
         """
         ssl_mode: choose between "https" and "http"
         server_mode: dev - flask, prod - wsgi
-        port_number: for https port should be 443, but it can be different with port redirect
+        port_number: for https port should be either default 8080 and redirected to 443 or set to 443
         """
         self.css_dir = css_dir
         self.js_dir = js_dir
