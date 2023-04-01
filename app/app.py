@@ -84,6 +84,9 @@ def blog():
 def mystory():
     return render_template("blog/mystory.html")
 
+@app.route("/assassins_creed")
+def assassins_creed():
+    return render_template("blog/assassins_creed.html")
 
 @app.route("/drawing")
 def drawing():
