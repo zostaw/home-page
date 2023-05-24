@@ -88,6 +88,10 @@ def mystory():
 def dionysiac_architects():
     return render_template("blog/dionysiac_architects.html")
 
+@app.route("/fear_of_existence")
+def fear_of_existence():
+    return render_template("blog/fear_of_existence.html")
+
 @app.route("/drawing")
 def drawing():
     return render_template("blog/drawing.html")
@@ -98,3 +102,5 @@ def drawing():
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0")
+    me-page
+
