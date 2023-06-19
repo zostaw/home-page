@@ -2,30 +2,40 @@
 
 {% block content %}
 
+    <!-- left navigation -->
+    <div class="blog-nav">
 
-<!-- <hr class="divider"> -->
+        {% for category in lst_blog_pages %}
 
+        <h4> {{ category.name }} </h4> 
 
+            {% for blog_post in category.list %}
+                </br>
+                <a class="a-nav-item" href="#{{ blog_post.url }}" class="nav-link">{{ blog_post.name }}</a>
+            {% endfor %}
 
+        {% endfor %}
 
+    </div>
 
     <!-- Page content -->
-      <h1 style="font-size: 25px; text-align: center;">Blog</h1>
+    <div class="container"> 
 
-      <h3> Making sense </h3>
-      <div class="projects-paragraph">
-      <a class="a-nav-item" href="{{ url_for('mystory') }}" class="nav-link">Childhood aspirations.</a>
-		</br>
-      <a class="a-nav-item" href="{{ url_for('dionysiac_architects') }}" class="nav-link">Dionysiac Architects.</a>
-		</br>
-      <a class="a-nav-item" href="{{ url_for('fear_of_existence') }}" class="nav-link">Fear of existence.</a>
-      </div>
-      <h3> Learning </h3>
-      <div class="projects-paragraph">
-      <a class="a-nav-item" href="{{ url_for('drawing') }}" class="nav-link">First lesson on drawing.</a>
-      </div>
+        <h1 style="font-size: 25px; text-align: center;">Blog</h1>
 
+        {% for category in lst_blog_pages %}
 
+        <h2>{{ category.name }}</h2>
+
+            {% for blog_post in category.list %}
+                <div id={{ blog_post.url }}>
+                    <h3>{{ blog_post.name }}</h3>
+                    {% include "blog/" + blog_post.url + ".html" %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+    </div>
 
 {% endblock %}
 

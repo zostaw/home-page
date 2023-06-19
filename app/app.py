@@ -77,24 +77,24 @@ def spaced_repetition():
 ###### blogs section  - start ######
 @app.route("/blog")
 def blog():
-    return render_template("blog.html")
-
-
-@app.route("/mystory")
-def mystory():
-    return render_template("blog/mystory.html")
-
-@app.route("/dionysiac_architects")
-def dionysiac_architects():
-    return render_template("blog/dionysiac_architects.html")
-
-@app.route("/fear_of_existence")
-def fear_of_existence():
-    return render_template("blog/fear_of_existence.html")
-
-@app.route("/drawing")
-def drawing():
-    return render_template("blog/drawing.html")
+    lst_blog_pages = [
+            {'name': "Learning",
+             'list':
+                [
+                    {'url': "engineers_memoir", 'name': "Becoming an engineer"},
+                    {'url': "drawing", 'name': "Learning to draw"},
+                ]
+             },
+            {'name': "Making sense",
+             'list':
+                [
+                    {'url': "fear_of_existence", 'name': "Fear of existence"}, 
+                    {'url': "dionysiac_architects", 'name': "Dionysiac Architects"}, 
+                    {'url': "mystory", 'name': "Childhood aspirations"}, 
+                ]
+            },
+            ]
+    return render_template("blog.html", lst_blog_pages=lst_blog_pages)
 
 
 ###### blogs section - end ######

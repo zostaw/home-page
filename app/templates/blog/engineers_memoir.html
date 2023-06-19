@@ -1,0 +1,108 @@
+{% block content %}
+
+    <!-- Page content -->
+
+18.06.2023
+
+<p>
+Unless one fits the social expectations of his role as a worker or is incredibly fortunate, then he can only evade the unbearable conditions of it by becoming a nomad.  
+</br>
+To become a nomad one must become a specialist of some sort - perhaps a craftsman or an engineer.  
+</br>
+I take a path of an engineer, but what does it take to be one?
+</p>
+
+
+<p>
+I am trying to learn <strong>whisper.cpp</strong> these days.  
+</br>
+I succeeded to download some base models and to make it work with sample wav file and source from microphone.  
+</br>
+It provided me with trouble when trying to use microphone as a source with medium model.  
+</br>
+I'm using <strong>Macbook Air M1</strong> and it seems like the computer is too slow for this.  
+</br>
+It works pretty ok with base model, but my language sucks.  
+</br>
+I'm not native speaker - and the results are not precise. I need a bigger model.  
+</br>
+The medium works pretty well with my recordings, even what I recorded in a forest on my phone. There were background noises and my poor diction.  
+</br>
+The processing is simple, just down-sample to 16kHz:
+</p>
+
+<code>
+ffmpeg -i source_file.wav -vn -ar 16000 -ac 1 destination_file.wav
+</code>
+
+<p>
+I do not want to give up the direct microphone recording, I would like to build a conversation bot similar to that of https://github.com/yacineMTB/talk  
+</p>
+
+
+<p>
+<p><strong>whisper.cpp</strong> provides option to compile the model into <strong>Core ML</strong>, which promises to work faster using <strong>Apple Neural Engine</strong>.</p>
+</br>
+My mind is overwhelmed with all these abstract names, but I continue.  
+</br>
+After hours of compiling, it gets stacked on <em>Running MIL backend_mlprogram pipeline: 100%</em>, a solution is to kill <em>ANECompilerService</em>, yet another unfamiliar name.  
+</br>
+Pursuit of engineering is full of that - stumbling upon that which is ununderstandable and pushing through it, until the bulb lights up.
+</br>
+The work is not clean, it takes one to get into the mud.  
+</br>
+When starting the work on something new, one might prefer everything to be clean and precise. So, that nothing is left unsaid, there's no struggle then. It might seem most beautiful, then.  
+</br>
+But the world's beauty does not come from cleanliness, there's dirt all around.  
+</br>
+Perhaps that's the beauty of the human life - that it's not all sharp and clean concepts - it's not just the presented stuff on the painting that matters, but also the traces of strokes of the artist, maybe some mistakes that make a connected between the craft and the artwork.  
+</br>
+That the artwork without this connection to the act of creating is soul-less, imperfect.  
+</br>
+Engineering is an art. And life worth living is only that of an artist. I want to have a meaningful life...
+</br>
+I shall embrace Wabi-Sabi!
+</p>
+
+
+<p>
+There's so many issues... but community for <em>whisper.cpp</em> is very helpful.  
+</p>
+
+
+<p>
+In the end <em>Core ML</em> is soo much better!!!  
+</br>
+medium model (original) - total time = 178976.67 ms  
+</br>
+medium model (Core ML)  - total time =  75988.48 ms  
+</p>
+
+<p><em>Medium</em> is still slow for direct microphone mode, but somehow the <em>basic</em> model works really good, today. Is it the <em>Core ML</em> again?</p>
+<h4 id="notes">Notes</h4>
+<ul>
+<li>keep your commands snippets in a handy place</li>
+<li>use Core ML - it&#39;s much better performance</li>
+<li>quantize your models (q5_0)</li>
+<li>skip the details, go for the take</li>
+<li>I need to learn the art of extraction</li>
+<li>build a system that would take prompts from me and perform certain tasks in abstract way (something like programming in language of system),<ul>
+<li>it would also monitor everything,</li>
+<li>it would generate some kind of reports</li>
+<li>the point is to help me with thinking, organizing and processing knowledge to allow me synthesize them</li>
+</ul>
+</li>
+<li>mathematics of social symbols - understanding what are the patterns of history and deduce the future progression<ul>
+<li>are there <em>colors</em> of symbols?</li>
+<li>how do they overlap?</li>
+<li>is it possible to predict the high-level direction?</li>
+<li>how to go down from abstract to actual?</li>
+</ul>
+</li>
+<li>think about reorganizing blog on my page - add navigation on the side</li>
+<li>embrace <em>uggly</em> notes, they are good</li>
+</ul>
+
+
+{% endblock %}
+
