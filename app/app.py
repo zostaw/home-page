@@ -77,6 +77,25 @@ def spaced_repetition():
 ###### blogs section  - start ######
 @app.route("/blog")
 def blog():
+    # lst_blog_pages is a list of blog posts categorized
+    # each element in list is a category with list of pages
+    # the blog posts should be in html format and placed as separate files in app/templates/blog/ (i.e.:<page_url>.html)
+    # example:
+#   lst_blog_pages = [
+#           {'name': "Category name",
+#            'list':
+#               [
+#                   {'url': "page_url1", 'name': "Title of blog post 1"},
+#                   {'url': "page_url2", 'name': "Title of blog post 2"},
+#               ]
+#            },
+#           {'name': "Another category name",
+#            'list':
+#               [
+#                   {'url': "page_url3", 'name': "Title of blog post in another category"}, 
+#               ]
+#           },
+#           ]
     lst_blog_pages = [
             {'name': "Learning",
              'list':
