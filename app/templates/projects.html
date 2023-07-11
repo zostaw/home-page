@@ -21,61 +21,79 @@
         <a href="https://github.com/zostaw/home-page">This page <i class="fa fa-github"></i></a> - This page you are reading right now! </br>
 
         <b>What I learned:</b> basics of flask, html and css, as well as CI/CD processes - I built a Jenkins pipeline that loads this repository from github, builds a docker image and deploys in my kubernetes cluster.
-        You can find the code on github and even deploy in your docker/k8s by pulling dockerhub image.</br>
-        #python #jenkins #k8s #flask #html #css #docker #github </br>
+        You can find the code on github and even deploy in your docker/k8s by pulling dockerhub image. It runs on Raspberry Pi :)</br>
+        #python #jenkins #k8s #flask #html #css #docker #github #raspberrypi</br>
 
-            </div>
+      </div>
+      </br>
 
       <div class="projects-paragraph">
         <a href="https://github.com/zostaw/learning_ansible_microk8s">Building microk8s cluster with ansible <i class="fa fa-github"></i></a> - my playbooks for installation of snap, microk8s and forming a k8s cluster from ubuntu/centos servers.</br>
 
-        <b>What I learned:</b> the basics of ansible: the structure - inventory, playbooks, roles - as well as some of the important things one should consider when generalizing a process.</br>
+        <b>What I learned:</b> the basics of ansible (the structure - inventory, playbooks, roles), as well as some of the important things one should consider when generalizing a process.</br>
         For example that there are some common elements for multiple entities, but some have different alternatives and the beauty of it is that one can build something, make it complete by abstracting away all the parts of it. </br>
         By understanding all the parts, one can better understand how all of it connects together into a harmonious process.</br>
         #ansible #kvm #qemu #unix #k8s</br>
-            </div>
-
-      <div class="projects-paragraph">
-          <a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition <i class="fa fa-github"></i></a> - a simple program that implements a spaced repetition tool for learning<!--, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a>--> .</br>
-  #python #javascript</br>
-
-
       </div>
+      </br>
+
       <div class="projects-paragraph">
-	<a href="https://github.com/zostaw/treePrinter">Tree Schema Printer <i class="fa fa-github"></i></a> - the program is drawing a polar plot of tree graphs, it assigns the positions of the nodes based on their spread size. I enjoyed this project particularly, because it had no sense, no purpose other than exploration, building intuitions on mathematical concept and learning basics about programming language.</br>
-#python</br>
-	</br>
-	<td>
-		<tr>
-	<img id="beautiful3" src="static/images/beautiful3.png" style="border-style: solid; border-width: 1px; width:49%;"  alt="Beautiful Tree" onclick="openModal();currentSlide(1)" class="hover-shadow">
-		</tr>
-			<tr>
-	<img id="beautiful4" src="static/images/beautiful4.png" style="border-style: solid; border-width: 1px; width:49%;" alt="Even More Beautiful Tree" onclick="openModal();currentSlide(2)" class="hover-shadow">
-			</tr>
-	</td>
-	<!-- The Modal -->
+        <a href="https://github.com/zostaw/ludwig.git">Ludwig <i class="fa fa-github"></i></a> - Ludwig moves in shell. He explores the alleys of paths that are available to him, pondering about existence, searching for a soulmate.</br>
+
+        <b>Why:</b> This is an ongoing project. I'm interested in self-assembling and I want to understand what does it take for a being to self-propagate, to change beyond death - what is continuity of existance. In particular two interpretations on this idea: </br>- to teleport; </br>- to spread and evolve.</br>
+        I want to build intuitions on how does organic life maps onto computers. This is probably cliche topic, but it is fascinating nevertheless.</br>
+        This is inspired by Permutation City, Lee Cronin's Assembly Theory and David Deutsch's takes on simulation-reality relationship and limitations of simulation.
+        I do not delude myself, this is beyond my comprehension, but I think this is important to build intuitions from reality to understand concepts better.</br>
+        #shell #assembly-theory #self-propagation</br>
+      </div>
+      </br>
+
+      <div class="projects-paragraph">
+        <a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition <i class="fa fa-github"></i></a> - a simple program that implements a spaced repetition tool for learning.<!--, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a>--> .</br>
+        <b>What I learned:</b> While working on this project I learned the basics of the structure of python classes: </br>
+        - constructor (init) method and how it works together with optional input parameters, other methods, variables - it was interesting to figure out a way to implement optional input parameters while keeping the code readable, </br>
+        - handling files and databases - especially interesting was writing methods that do not destroy the cohesion of the database, </br>
+        - implementing getter method - it tought me awereness of types of things, how one entity can change its shape and form upon interaction with other. Python is very flexible with types and one variable can take multiple forms - number of elements in an array can change it's type from None, through int to array. Btw. it's a great metaphor for life - the changing of one's form dependent on the interaction with the world, the invisible forces playing with her/him. </br>
+        - ValueErrors - I learned how to keep the consistency of the program by verifying the state of variables before interacting with them in method. </br>
+        #python </br>
+      </div>
+      </br>
+
+      <div class="projects-paragraph">
+        <a href="https://github.com/zostaw/treePrinter">Tree Schema Printer <i class="fa fa-github"></i></a> - the program is drawing a polar plot of tree graphs, it assigns the positions of the nodes based on their spread size. I enjoyed this project particularly, because it had no sense, no purpose other than exploration, building intuitions on mathematical concept and learning basics about programming language.</br>
+        #python</br>
+      </br>
+        <td>
+            <tr>
+                <img id="beautiful3" src="static/images/beautiful3.png" style="border-style: solid; border-width: 1px; width:49%;"  alt="Beautiful Tree" onclick="openModal();currentSlide(1)" class="hover-shadow">
+            </tr>
+            <tr>
+                <img id="beautiful4" src="static/images/beautiful4.png" style="border-style: solid; border-width: 1px; width:49%;" alt="Even More Beautiful Tree" onclick="openModal();currentSlide(2)" class="hover-shadow">
+            </tr>
+        </td>
+          <!-- The Modal -->
         <div id="myModal" class="modal">
 
-          <!-- The Close Button -->
-          <span class="close">&times;</span>
+              <!-- The Close Button -->
+              <span class="close">&times;</span>
 
-          <!-- Modal Content (The Image) -->
-          <img class="modal-content" id="img01">
-	  <span class="close cursor" onclick="closeModal()">&times;</span>
-	    <div class="modal-content">
-    <div class="mySlides">
-      <div class="numbertext">1 / 4</div>
-      <img src="static/images/beautiful3.png"  style="max-height: 100vh;">
-    </div>
+              <!-- Modal Content (The Image) -->
+              <img class="modal-content" id="img01">
+              <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+                <div class="mySlides">
+                  <div class="numbertext">1 / 4</div>
+                  <img src="static/images/beautiful3.png"  style="max-height: 100vh;">
+                </div>
 
-    <div class="mySlides">
-      <div class="numbertext">2 / 4</div>
-      <img src="static/images/beautiful4.png" style="max-height: 100vh;">
-    </div>
+                <div class="mySlides">
+                  <div class="numbertext">2 / 4</div>
+                  <img src="static/images/beautiful4.png" style="max-height: 100vh;">
+                </div>
 
-    </div>
-          <!-- Modal Caption (Image Text) -->
-          <div id="caption"></div>
+            </div>
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
         </div>
 
       </div>
