@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <div class="container">
     <!-- Page content -->
       <h1 style="font-size: 25px; text-align: center;">Mateusz Kowalkowski</h1>
@@ -16,7 +17,11 @@
       Currently my learning is focused on becoming better at organizing my work and improving my knowledge and skills related to development processeses and new technologies.
       </br>
       I am grateful to work with kind and wise human beings, to talk about life and to learn from them.
+      </br>
+      You can contact me at <a href="" data-part1="mateusz.kowal" data-part2="com" data-part3="kowski" data-part4="gmail"  data-subject="General%20Questions"></a>
       </p>
+      <script src="{{ url_for('static', filename='js/mail.js') }}"></script>
+
       <h3>Things I find fascinating to contemplate upon</h3>
       <p>
       - simplification and optimalization of technical processes
@@ -41,7 +46,7 @@
       </br>
       - learning about psychology and human nature <!-- human mind and psychology -->
       </br>
-      - spending time with my dog - Kleo
+      - hiking with my dog - Kleo
       </br>
       - rock climbing
       </br>
@@ -101,74 +106,71 @@
       </p>
 
 
-
-      <div id="myModal" class="modal">
+    <div id="myModal" class="modal">
 
         <!-- The Close Button -->
         <span class="close">&times;</span>
 
         <!-- Modal Content (The Image) -->
         <img class="modal-content" id="img01">
-  <span class="close cursor" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-  <div class="mySlides">
-    <div class="numbertext">1 / 4</div>
-    <img src="static/images/Kleo2.jpeg"  style="max-height: 100vh;">
-  </div>
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="mySlides">
+                <div class="numbertext">1 / 4</div>
+                <img src="static/images/Kleo2.jpeg"  style="max-height: 100vh;">
+            </div>
 
-  <div class="mySlides">
-    <div class="numbertext">2 / 4</div>
-    <img src="static/images/climbing.jpeg" style="max-height: 100vh;">
-  </div>
-
-  </div>
+            <div class="mySlides">
+                <div class="numbertext">2 / 4</div>
+                <img src="static/images/climbing.jpeg" style="max-height: 100vh;">
+            </div>
+        </div>
         <!-- Modal Caption (Image Text) -->
         <div id="caption"></div>
-      </div>
+        </div>
 
     </div>
 
-<script>
-function openModal() {
-document.getElementById("myModal").style.display = "block";
-}
+    <script>
+        function openModal() {
+        document.getElementById("myModal").style.display = "block";
+        }
 
-// Close the Modal
-function closeModal() {
-document.getElementById("myModal").style.display = "none";
-}
-
-
-var slideIndex = 1;
-showSlides(slideIndex);
+        // Close the Modal
+        function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+        }
 
 
-function currentSlide(n) {
-showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-var i;
-var slides = document.getElementsByClassName("mySlides");
-var captionText = document.getElementById("caption");
-if (n > slides.length) {slideIndex = 1}
-if (n < 1) {slideIndex = slides.length}
-for (i = 0; i < slides.length; i++) {
-  slides[i].style.display = "none";
-}
-slides[slideIndex-1].style.display = "block";
-}
+        var slideIndex = 1;
+        showSlides(slideIndex);
 
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-modal.style.display = "none";
-}
-</script>
+        function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+        }
 
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+    </script>
 
 </div>
 {% endblock %}
