@@ -4,9 +4,9 @@ This is source code for my personal home page.
 
 It is deployed as docker image and it runs by default on port 8080.
 
-## PREREQUISITES
+## DEPENDENCIES
 
-- docker
+Currently tested on python 3.11.4+
 
 ## INSTALLATION
 
