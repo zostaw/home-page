@@ -21,8 +21,8 @@ jobs:
             apt install -y bash vim g++ gcc musl-dev #linux-headers
             apt install -y python3 libffi-dev
             # Install requirements
-            pip install --upgrade pip
-            pip install --no-cache-dir -r requirements.txt
+            python3 pip install --upgrade pip
+            python3 pip install --no-cache-dir -r requirements.txt
             
     - name: Compress the release image
       if: github.ref == 'refs/heads/releng' || startsWith(github.ref, 'refs/tags/')
