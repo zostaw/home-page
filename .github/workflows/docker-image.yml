@@ -18,7 +18,6 @@ jobs:
       with:
         base_image: raspios_lite:latest
         commands: |
-            commands to build image
             apt install -y bash vim g++ gcc musl-dev linux-headers
             apt install -y python3 build-base libffi-dev
             # Install requirements
