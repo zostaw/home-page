@@ -1,8 +1,7 @@
-FROM zostaw/numpy:python-numpy-1.0
-
-EXPOSE 8080
+FROM python:3.11.4-alpine
 
 RUN apk --update add bash vim g++ gcc musl-dev linux-headers
+RUN apk add --no-cache build-base libffi-dev
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
 
@@ -10,10 +9,6 @@ ENV STATIC_PATH /var/www/app/static
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
-
-RUN mkdir ~/.ssh
-RUN echo "Host *" >> ~/.ssh/config
-RUN echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
 # URL under which static (not modified by Python) files will be requested
 # They will be served by Nginx directly, without being handled by uWSGI
@@ -26,7 +21,7 @@ ENV STATIC_PATH /app/static
 ENV STATIC_INDEX 0
 
 # Add app
-COPY ./app /app
+#COPY ./app /app/app
 WORKDIR /app
 
 # Make /app/* available to be imported by Python globally to better support several use cases like Alembic migrations.
@@ -43,5 +38,4 @@ ENV PYTHONPATH=/app
 # Run the start script provided by the parent image tiangolo/uwsgi-nginx.
 # It will check for an /app/prestart.sh script (e.g. for migrations)
 # And then will start Supervisor, which in turn will start Nginx and uWSGI
-
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8080", "--cert", "cert.pem", "--key", "key.pem"]
+CMD echo “Hello World”

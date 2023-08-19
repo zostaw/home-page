@@ -5,124 +5,60 @@ pipeline {
     tools {nodejs "node"}
 
     environment {
-        IMAGE_NAME = "zostaw/home-page"
-        IMAGE_TAG = "app-1.0.1"
+        IMAGE_NAME = "zostaw/numpy"
+        IMAGE_TAG = "python-numpy-1.0"
         dockerhub = credentials("dockerhub")
-        sshkey = credentials("file_octojenkssh")
     }
     agent {
         kubernetes {
+            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+            //     name 'shell'
+            //     image 'ubuntu'
+            //     command 'sleep'
+            //     args 'infinity'
+            // }
             yaml '''
 apiVersion: v1
 kind: Pod
 spec:
   containers:
   - name: shell
-    image: zostaw/numpy:python-numpy-1.0
-    command:
-    - sleep
-    args:
-    - infinity
-    tty: true
-    volumeMounts:
-      - mountPath: /var/run/docker.sock
-        name: docker-sock
-  - name: docker
     image: docker:20.10.21-alpine3.16
     command:
-    - cat
+    - sleep
+    args:
+    - infinity
     tty: true
     volumeMounts:
       - mountPath: /var/run/docker.sock
         name: docker-sock
-  - name: ssh
-    image: jenkins/ssh-agent:alpine
-    command:
-    - sleep
-    args:
-    - infinity
   volumes:
   - name: docker-sock
     hostPath:
       path: /var/run/docker.sock
 '''
+            // Can also wrap individual steps:
+            // container('shell') {
+            //     sh 'hostname'
+            // }
             defaultContainer 'shell'
         }
     }
 
       stages {
-        stage('Pre script') {
+        stage('Build docker image') {
             steps {
-                sh 'pwd'
-                sh 'ls -las'
-                sh 'cat .git/config'
-                sh 'apk --update add bash vim g++ gcc musl-dev linux-headers'
-                sh 'pip install --upgrade pip'
-                sh 'pip install --no-cache-dir -r ./requirements.txt'
+                sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
             }
         }
-        stage('Test') {
+        stage('Deploy to dockerhub') {
             steps {
-                echo 'Testing..'
-                sh 'hostname'
-                sh 'pwd'
-                sh 'ls -las'
-                sh 'python HomePage.py start &'
+                echo 'Deploying....'
+                sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
+                sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'
             }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                container("docker"){
-                    sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
-                    sh 'echo ${dockerhub_PSW} | docker login -u="${dockerhub_USR}" --password-stdin'
-                    sh 'docker image push $IMAGE_NAME:$IMAGE_TAG'
-                }
-            }
-        }
-          stage('Deploy'){
-              steps{
-                  container('ssh'){
-                    sh 'cat ${sshkey} > /tmp/secret && chmod 0600 /tmp/secret'
-                    sh '''ssh -o StrictHostKeyChecking=no -i /tmp/secret zostaw@192.168.1.172 "
-cat <<EOF > /tmp/pod_home_page.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: home-page
-  namespace: default
-  labels:
-    app.kubernetes.io/name: home-page
-spec:
-  containers:
-  - name: home-page
-    image: $IMAGE_NAME:$IMAGE_TAG
-    imagePullPolicy: Always
-    ports:
-    - containerPort: 8080
-EOF
-cat <<EOF > /tmp/service_home_page.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: home-page
-  namespace: default
-  labels:
-    app.kubernetes.io/name: home-page
-spec:
-  selector:
-    app.kubernetes.io/name: home-page
-  type: NodePort
-  ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30000
-EOF
-/usr/bin/microk8s kubectl replace --force -f /tmp/pod_home_page.yaml
-/usr/bin/microk8s kubectl replace --force -f /tmp/service_home_page.yaml
-                    "'''
-                }
-              }
         }
     }
 
