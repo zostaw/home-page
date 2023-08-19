@@ -1,8 +1,9 @@
-FROM zostaw/numpy:python-numpy-1.0
+FROM zostaw/multiarch-numpy-base:latest
 
 EXPOSE 8080
 
 RUN apk --update add bash vim g++ gcc musl-dev linux-headers
+RUN apk add --no-cache build-base libffi-dev
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
 

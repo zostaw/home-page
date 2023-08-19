@@ -44,9 +44,12 @@ python HomePage.py start # optionally add "--ssl_mode=http"
 
 ```bash"
 IMAGE_NAME="zostaw/home-page"
-IMAGE_TAG="app-1.0.1"
+IMAGE_TAG="last"
 docker build -t $IMAGE_NAME:$IMAGE_TAG .
-docker run -d --restart unless-stopped -p 8080:8080 --name=home-page $IMAGE_NAME:$IMAGE_TAG
+docker run -d --restart unless-stopped -p 8080:8080 --name=zostaw-home-page $IMAGE_NAME:$IMAGE_TAG
+# if https is configured (see #Setup)
+docker cp ./key.pem zostaw-home-page:/app/key.pem
+docker cp ./cert.pem zostaw-home-page:/app/cert.pem
 ```
 
 ### Kubernetes
