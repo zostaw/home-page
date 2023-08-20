@@ -1,0 +1,9 @@
+version: '3'
+services:
+  home-page:
+    image: zostaw/multiarch-home-page:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app/cert.pem:/app/cert.pem
+      - ./app/key.pem:/app/key.pem
