@@ -49,3 +49,5 @@ zipp==3.16.2
 zope.event==5.0
 zope.interface==6.0
 robotframework
+robotframework-seleniumlibrary
+robotframework-selenium2library
