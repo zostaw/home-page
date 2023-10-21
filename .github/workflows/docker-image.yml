@@ -35,7 +35,7 @@ jobs:
         if: always()
         with:
           name: reports
-            #path: ${{ github.workspace }}/../reports
+          path: reports
 
       - name: wget the built website
         run: |

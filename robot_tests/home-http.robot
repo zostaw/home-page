@@ -3,7 +3,7 @@ Documentation     Simple example using SeleniumLibrary.
 Library           SeleniumLibrary
 
 *** Variables ***
-${LOGIN URL}      http://zostaw.cloud
+${LOGIN URL}      http://localhost:8080/
 ${BROWSER}        Chrome
 
 *** Test Cases ***
