@@ -16,6 +16,10 @@ jobs:
           submodules: true
           token: ${{ secrets.CI_TOKEN }}
 
+      - name: Install python dependencies
+        run: |
+          pip install -r requirements.txt
+
       - name: Build the website
         run: |
           python HomePage.py start
