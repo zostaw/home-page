@@ -3,8 +3,7 @@ Documentation     Simple example using SeleniumLibrary.
 Library           SeleniumLibrary
 
 *** Variables ***
-${LOGIN URL}      http://localhost:8080/
-${BROWSER}        Chrome
+${LOGIN URL}      http://127.0.0.1:8080
 
 *** Test Cases ***
 Valid Login
