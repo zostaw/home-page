@@ -30,24 +30,19 @@ jobs:
         env:
           BROWSER: chrome
           ROBOT_TESTS_DIR: ${{ github.workspace }}/tests
-          ROBOT_REPORTS_DIR: ${{ github.workspace }}/tests
+          ROBOT_REPORTS_DIR: ${{ github.workspace }}/reports
 
       - name: Upload test results
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: reports
-          path: ${{ github.workspace }}/tests
+          path: ${{ github.workspace }}/reports
 
       - name: wget the built website
         run: |
           wget --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site http://localhost:8080/
-
-      - name: List output
-        run: |
-          # List the downloaded files
-          ls -l 
 
   build:
     runs-on: ubuntu-latest
