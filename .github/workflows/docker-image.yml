@@ -20,19 +20,27 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Install chrome and chromedriver for robot
-        run: |
-          google-chrome --version
-          wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chromedriver-linux64.zip
-          unzip chromedriver-linux64.zip
-
       - name: Build the website
         run: |
           python HomePage.py start --ssl_mode http &
+          sleep 3
+
+      - name: Execute tests
+        uses: joonvena/robotframework-docker-action@v0.1
+        env:
+          BROWSER: chrome
+          ROBOT_TESTS_DIR: ${{ github.workspace }}/tests
+          ROBOT_REPORTS_DIR: ${{ github.workspace }}/tests
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: reports
+          path: ${{ github.workspace }}/tests
 
       - name: wget the built website
         run: |
-          sleep 4
           wget --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site http://localhost:8080/
 
@@ -40,11 +48,6 @@ jobs:
         run: |
           # List the downloaded files
           ls -l 
-      - name: robot test
-        run: |
-          cd tests
-          export PATH=$PWD/chromedriver-linux64:$PATH
-          robot home-http.py
 
   build:
     runs-on: ubuntu-latest
