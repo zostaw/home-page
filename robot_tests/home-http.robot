@@ -4,6 +4,7 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${LOGIN URL}      http://127.0.0.1:8080
+${BROWSER}        Chrome
 
 *** Test Cases ***
 Valid Login
@@ -13,5 +14,5 @@ Valid Login
 *** Keywords ***
 
 Welcome Page Should Be Open
-    Open Browser    ${LOGIN URL}    
+    Open Browser    ${LOGIN URL}    ${BROWSER}
     Title Should Be    Mateusz Kowalkowski
