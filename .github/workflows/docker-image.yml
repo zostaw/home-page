@@ -43,6 +43,7 @@ jobs:
           --no-parent -P downloaded-site http://localhost:8080/
 
   build:
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
