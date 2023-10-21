@@ -22,10 +22,11 @@ jobs:
 
       - name: Build the website
         run: |
-          python HomePage.py start --ssl_mode http
+          python HomePage.py start --ssl_mode http &
 
       - name: wget the built website
         run: |
+          sleep 10
           wget --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site http://localhost:8080/
 
@@ -35,7 +36,8 @@ jobs:
           ls -l 
       - name: robot test
         run: |
-          cd tests; robot home.py
+          cd tests
+          robot home.py
 
   build:
     runs-on: ubuntu-latest
