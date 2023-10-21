@@ -20,6 +20,14 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Install chrome and chromedriver for robot
+        run: |
+          wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chrome-linux64.zip
+          wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chromedriver-linux64.zip
+          unzip chrome-linux64.zip
+          unzip chromedriver-linux64.zip
+          export PATH=$PATH:$PWD
+
       - name: Build the website
         run: |
           python HomePage.py start --ssl_mode http &
@@ -37,7 +45,7 @@ jobs:
       - name: robot test
         run: |
           cd tests
-          robot home.py
+          robot home-http.py
 
   build:
     runs-on: ubuntu-latest
