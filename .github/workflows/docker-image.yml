@@ -23,11 +23,8 @@ jobs:
       - name: Install chrome and chromedriver for robot
         run: |
           google-chrome --version
-          wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chrome-linux64.zip
           wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chromedriver-linux64.zip
-          unzip chrome-linux64.zip
           unzip chromedriver-linux64.zip
-          sudo ln -fs $PWD/chrome-linux64/chrome /usr/bin/google-chrome
 
       - name: Build the website
         run: |
@@ -46,8 +43,7 @@ jobs:
       - name: robot test
         run: |
           cd tests
-          export PATH=$PWD/chrome-linux64:$PWD/chromedriver-linux64:$PATH
-          echo $PATH
+          export PATH=$PWD/chromedriver-linux64:$PATH
           robot home-http.py
 
   build:
