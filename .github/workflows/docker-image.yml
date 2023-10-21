@@ -22,6 +22,7 @@ jobs:
 
       - name: Install chrome and chromedriver for robot
         run: |
+          google-chrome --help
           wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chrome-linux64.zip
           wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chromedriver-linux64.zip
           unzip chrome-linux64.zip
