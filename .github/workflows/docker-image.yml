@@ -26,6 +26,7 @@ jobs:
           wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/118.0.5993.70/linux64/chromedriver-linux64.zip
           unzip chrome-linux64.zip
           unzip chromedriver-linux64.zip
+          sudo mv -f chrome-linux64/google-chrome /usr/bin/google-chrome
           export PATH=$PWD/chrome-linux64:$PWD/chromedriver-linux64:$PATH
 
       - name: Build the website
@@ -34,7 +35,7 @@ jobs:
 
       - name: wget the built website
         run: |
-          sleep 10
+          sleep 4
           wget --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site http://localhost:8080/
 
@@ -45,6 +46,8 @@ jobs:
       - name: robot test
         run: |
           cd tests
+          echo $PATH
+          which chrome
           robot home-http.py
 
   build:
