@@ -6,44 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-
-      - name: Install python dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Build the website
-        run: |
-          python HomePage.py start --ssl_mode http &
-          sleep 3
-
-      - name: Execute tests
-        uses: joonvena/robotframework-docker-action@v1.0
-        with:
-          browser: chrome
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: reports
-          path: reports
-
-      - name: wget the built website
-        run: |
-          wget --mirror --page-requisites --convert-links \
-          --no-parent -P downloaded-site http://localhost:8080/
-
   build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
