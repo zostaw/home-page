@@ -14,12 +14,7 @@ notes.txt
 tests/log.html
 tests/output.xml
 tests/report.html
-tests/selenium-screenshot-1.png
-tests/selenium-screenshot-2.png
-tests/selenium-screenshot-3.png
-tests/selenium-screenshot-4.png
-tests/selenium-screenshot-5.png
-tests/selenium-screenshot-6.png
+tests/selenium-screenshot*
 
 
 # below are common python ignore lists
