@@ -22,17 +22,20 @@ jobs:
 
       - name: Build the website
         run: |
-          python HomePage.py start
+          python HomePage.py start --ssl_mode http
 
       - name: wget the built website
         run: |
           wget --mirror --page-requisites --convert-links \
-          --no-parent -P downloaded-site https://localhost:8080/
+          --no-parent -P downloaded-site http://localhost:8080/
 
       - name: List output
         run: |
           # List the downloaded files
           ls -l 
+      - name: robot test
+        run: |
+          cd tests; robot home.py
 
   build:
     runs-on: ubuntu-latest
