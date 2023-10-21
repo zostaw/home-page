@@ -13,5 +13,5 @@ Valid Login
 *** Keywords ***
 
 Welcome Page Should Be Open
-    Open Browser    ${LOGIN URL}    ${BROWSER}
+    Open Browser    ${LOGIN URL}    
     Title Should Be    Mateusz Kowalkowski
