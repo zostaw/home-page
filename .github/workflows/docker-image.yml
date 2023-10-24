@@ -7,7 +7,7 @@ on:
     branches: [ "actions-tests2" ]
 
 jobs:
-  build-and-run-container:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -31,40 +31,35 @@ jobs:
           docker build -t $IMAGE_NAME:$IMAGE_TAG .
           docker compose up -d
 
-      - name: Verify status
+      - name: Verify in next job
         run: |
           sleep 10
           docker ps
 
-  test:
-    needs: build-and-run-container
-    runs-on: ubuntu-latest
-    steps:
-    - name: Verify in next job
-      run: |
-        docker ps
-        wget --mirror --page-requisites --convert-links \
-        --no-parent -P downloaded-site https://home-page-home-page-1:8080/
-    - name: wget the built website
-      run: |
-        wget --mirror --page-requisites --convert-links \
-        --no-parent -P downloaded-site https://localhost:8080/
+      - name: wget container name
+        run: |
+          wget --mirror --page-requisites --convert-links \
+          --no-parent -P downloaded-site https://home-page-home-page-1:8080/
+      - name: wget localhost
+        run: |
+          wget --mirror --page-requisites --convert-links \
+          --no-parent -P downloaded-site https://localhost:8080/
 
-    - name: Execute tests
-      uses: joonvena/robotframework-docker-action@v1.0
-      with:
-        browser: chrome
+      - name: Execute tests
+        uses: joonvena/robotframework-docker-action@v1.0
+        with:
+          browser: chrome
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v1
-      if: always()
-      with:
-        name: reports
-        path: reports
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: reports
+          path: reports
 
 
   build:
-    needs: test
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
