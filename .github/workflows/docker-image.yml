@@ -24,6 +24,7 @@ jobs:
         run: |
           openssl req -x509 -newkey rsa:4096 -nodes -out app/cert.pem -keyout app/key.pem -days 1 -subj "/C=PL/ST=State/L=/O=/OU=/CN=localhost"
 
+
       - name: Build and Run Docker image
         run: |
           IMAGE_NAME="zostaw/multiarch-home-page"
@@ -31,12 +32,18 @@ jobs:
           docker build -t $IMAGE_NAME:$IMAGE_TAG .
           docker compose up -d
 
+      - name: Create Docker Network
+        run: docker network create my-network
+
+      - name: attach to network
+        run: docker network connect my-network home-page-home-page-1
+
       - name: Verify in next job
         run: |
-          sleep 10
+          sleep 3
           docker ps
 
-      - name: wget localhost
+      - name: Wget localhost
         run: |
           wget --no-check-certificate --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site https://localhost:8080
@@ -45,6 +52,7 @@ jobs:
         uses: joonvena/robotframework-docker-action@v1.0
         with:
           browser: chrome
+          network: my-network
 
       - name: Upload test results
         uses: actions/upload-artifact@v1
