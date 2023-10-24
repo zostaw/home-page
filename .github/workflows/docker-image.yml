@@ -40,6 +40,11 @@ jobs:
     needs: build-and-run-container
     runs-on: ubuntu-latest
     steps:
+    - name: Verify in next job
+      run: |
+        docker ps
+        wget --mirror --page-requisites --convert-links \
+        --no-parent -P downloaded-site https://home-page-home-page-1:8080/
     - name: wget the built website
       run: |
         wget --mirror --page-requisites --convert-links \
