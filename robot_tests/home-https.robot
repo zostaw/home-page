@@ -5,7 +5,7 @@ Library           SeleniumLibrary
 *** Variables ***
 ${URL}      https://home-page-home-page-1:8080
 ${BROWSER}        Chrome
-${Options}        options=add_argument(['--ignore-certificate-errors', '--allow-insecure-localhost'])
+${Options}        options=add_argument('--ignore-certificate-errors');add_argument('--allow-insecure-localhost'])
 
 *** Test Cases ***
 Open Page
