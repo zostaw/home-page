@@ -48,9 +48,12 @@ jobs:
           wget --no-check-certificate --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site https://localhost:8080
 
+      - name: List WORKSPACE
+        run: ls $WORKSPACE
+
       - name: Execute tests
         run: |
-          docker run --network=my-network --shm-size=1g -e BROWSER=chrom -v $WORKSPACE/robot_tests:/opt/robotframework/tests:Z -v $WORKSPACE/reports:/opt/robotframework/reports:Z ppodgorsek/robot-framework:latest
+          docker run --network=my-network --shm-size=1g -e BROWSER=chrome -v ${PWD}/robot_tests:/opt/robotframework/Tests:Z -v $PWD/reports:/opt/robotframework/reports:Z ppodgorsek/robot-framework:latest
 
           #      - name: Execute tests
           #        uses: joonvena/robotframework-docker-action@v1.0
