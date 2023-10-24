@@ -4,7 +4,7 @@ Library           Browser
 
 *** Variables ***
 ${URL}      https://home-page-home-page-1:8080
-${BROWSER}        Chrome
+${BROWSER}        chromium
 ${Options}        options=add_argument("--ignore-certificate-errors")
 ${HEADLESS}       ${True}
 
