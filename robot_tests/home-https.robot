@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation     Open Page using SeleniumLibrary.
-Library           SeleniumLibrary
+Library           Browser
 
 *** Variables ***
 ${URL}      https://home-page-home-page-1:8080
