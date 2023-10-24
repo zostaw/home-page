@@ -36,14 +36,10 @@ jobs:
           sleep 10
           docker ps
 
-      - name: wget container name
-        run: |
-          wget --mirror --page-requisites --convert-links \
-          --no-parent -P downloaded-site https://home-page-home-page-1:8080/
       - name: wget localhost
         run: |
           wget --mirror --page-requisites --convert-links \
-          --no-parent -P downloaded-site https://localhost:8080/
+          --no-parent -P downloaded-site https://localhost:8080
 
       - name: Execute tests
         uses: joonvena/robotframework-docker-action@v1.0
