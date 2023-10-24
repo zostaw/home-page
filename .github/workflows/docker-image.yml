@@ -38,7 +38,7 @@ jobs:
 
       - name: wget localhost
         run: |
-          wget --mirror --page-requisites --convert-links \
+          wget --no-check-certificate --mirror --page-requisites --convert-links \
           --no-parent -P downloaded-site https://localhost:8080
 
       - name: Execute tests
