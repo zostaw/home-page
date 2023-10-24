@@ -22,7 +22,7 @@ jobs:
 
       - name: Create certificates
         run: |
-          openssl req -x509 -newkey rsa:4096 -nodes -out app/cert.pem -keyout app/key.pem -days 1 -subj "/C=PL/ST=State/L=/O=/OU=/CN=home-page-home-page-1"
+          openssl req -x509 -newkey rsa:4096 -nodes -out app/cert.pem -keyout app/key.pem -days 1 -subj "/C=PL/ST=State/L=/O=/OU=/CN=localhost"
 
       - name: Build and Run Docker image
         run: |
@@ -38,7 +38,7 @@ jobs:
     - name: wget the built website
       run: |
         wget --mirror --page-requisites --convert-links \
-        --no-parent -P downloaded-site https://home-page-home-page-1:8080/
+        --no-parent -P downloaded-site https://localhost:8080/
 
     - name: Execute tests
       uses: joonvena/robotframework-docker-action@v1.0
