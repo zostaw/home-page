@@ -5,6 +5,7 @@ Library           SeleniumLibrary
 *** Variables ***
 ${LOGIN URL}      https://localhost:8080/
 ${BROWSER}        Chrome
+${Options}        options=add_argument("--ignore-certificate-errors")
 
 *** Test Cases ***
 Valid Login
@@ -14,5 +15,5 @@ Valid Login
 *** Keywords ***
 
 Welcome Page Should Be Open
-    Open Browser    ${LOGIN URL}    ${BROWSER}
+    Open Browser    ${LOGIN URL}    ${BROWSER}    ${Options}
     Title Should Be    Mateusz Kowalkowski
