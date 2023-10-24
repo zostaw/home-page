@@ -6,6 +6,7 @@ Library           Browser
 ${URL}      https://home-page-home-page-1:8080
 ${BROWSER}        Chrome
 ${Options}        options=add_argument("--ignore-certificate-errors")
+${HEADLESS}       ${True}
 
 
 *** Test Cases ***
