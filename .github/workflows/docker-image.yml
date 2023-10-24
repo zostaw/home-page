@@ -2,12 +2,59 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "actions-tests2" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "actions-tests2" ]
 
 jobs:
+  build-and-run-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
+
+      - name: Install python dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create certificates
+        run: |
+          openssl req -x509 -newkey rsa:4096 -nodes -out app/cert.pem -keyout app/key.pem -days 1 -subj "/C=PL/ST=State/L=/O=/OU=/CN=home-page-home-page-1"
+
+      - name: Build and Run Docker image
+        run: |
+          IMAGE_NAME="zostaw/multiarch-home-page"
+          IMAGE_TAG="latest"
+          docker build -t $IMAGE_NAME:$IMAGE_TAG .
+          docker compose -d
+
+  test:
+    needs: build-and-run-container
+    runs-on: ubuntu-latest
+    steps:
+    - name: wget the built website
+      run: |
+        wget --mirror --page-requisites --convert-links \
+        --no-parent -P downloaded-site https://home-page-home-page-1:8080/
+
+    - name: Execute tests
+      uses: joonvena/robotframework-docker-action@v1.0
+      with:
+        browser: chrome
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: reports
+        path: reports
+
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
