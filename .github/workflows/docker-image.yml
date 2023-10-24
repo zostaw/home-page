@@ -50,7 +50,7 @@ jobs:
 
       - name: Execute tests
         run: |
-          docker run --network=my-network --shm-size=1g -e BROWSER=chrom -v $WORKSPACE/robot-tests:/opt/robotframework/tests:Z -v $WORKSPACE/robot-reports:/opt/robotframework/reports:Z ppodgorsek/robot-framework:latest
+          docker run --network=my-network --shm-size=1g -e BROWSER=chrom -v $WORKSPACE/robot_tests:/opt/robotframework/tests:Z -v $WORKSPACE/reports:/opt/robotframework/reports:Z ppodgorsek/robot-framework:latest
 
           #      - name: Execute tests
           #        uses: joonvena/robotframework-docker-action@v1.0
