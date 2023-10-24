@@ -15,5 +15,8 @@ Open Page
 *** Keywords ***
 
 Welcome Page Should Be Open
-    Open Browser    ${URL}    ${BROWSER}    ${Options}
+    New Browser    ${BROWSER}  ${HEADLESS}  
+    args=['--allow-insecure-localhost']
+    New Context    ignoreHTTPSErrors=${True}   bypassCSP=${True}
+    New Page    ${URL}
     Title Should Be    Mateusz Kowalkowski
