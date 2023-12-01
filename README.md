@@ -44,6 +44,14 @@ python HomePage.py start # optionally add "--ssl_mode=http"
 
 Make sure to check #Setup first
 
+Load image from docker-hub:
+```bash
+docker pull zostaw/multiarch-home-page:latest
+docker compose up -d
+
+```
+
+Or build image yourself:
 ```bash"
 IMAGE_NAME="zostaw/multiarch-home-page"
 IMAGE_TAG="latest"

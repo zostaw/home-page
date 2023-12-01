@@ -7,6 +7,8 @@ flask.out
 compose-dev.yaml
 app/cert.pem
 app/key.pem
+app/cert.pem.laptop
+app/key.pem.laptop
 cert.pem
 key.pem
 docker_rebuild.sh
