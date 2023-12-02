@@ -23,7 +23,7 @@ jobs:
       - name: Verify cert files
         run: |
           pwd
-          ls -a
+          ls -last app
 
       - name: Build and run test web
         run: |
