@@ -19,9 +19,11 @@ jobs:
       - name: Create certificates
         run: |
           openssl req -x509 -newkey rsa:4096 -nodes -out app/cert.pem -keyout app/key.pem -days 1 -subj "/C=PL/ST=State/L=Test/O=Test/OU=Test/CN=localhost"
+          chmod a+r app/key.pem
 
       - name: Verify cert files
         run: |
+          id
           echo $PWD:
           ls -last
           echo $PWD/app/:
