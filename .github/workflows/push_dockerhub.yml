@@ -1,6 +1,9 @@
 name: Dockerhub Release
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -9,7 +12,7 @@ jobs:
   tests:
     uses: ./.github/workflows/test_docker.yml
     secrets: inherit
-  build_and_push:
+  push_dockerhub:
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
