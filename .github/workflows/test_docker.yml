@@ -36,6 +36,7 @@ jobs:
         run: |
           sleep 5
           docker container ls -a
+          docker logs home-page-home-page-1
 
       - name: Execute tests
         run: |
