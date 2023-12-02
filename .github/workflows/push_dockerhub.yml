@@ -1,15 +1,15 @@
-name: Dockerhub Push
+name: Dockerhub Release
 
 on:
-  workflow_run:
-    workflows: ["Run Tests"]
-    branches: [main]
-    types: 
-      - completed
+  pull_request:
+    branches:
+      - main
 
 jobs:
+  tests:
+    uses: ./.github/workflows/test_docker.yml
   build_and_push:
-    needs: test
+    needs: [tests]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
