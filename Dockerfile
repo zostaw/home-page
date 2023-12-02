@@ -32,8 +32,9 @@ ENV PYTHONPATH=/app
 # Create a group and user
 ENV USER="appuser"
 ENV GROUP="appgroup"
+ENV UID="1001"
 RUN addgroup -S $GROUP
-RUN adduser -D $USER -S $USER -G $GROUP
+RUN adduser --uid $UID -D $USER -S $USER -G $GROUP
 
 # Change owner of the process
 RUN chown -R $USER:$GROUP /app
