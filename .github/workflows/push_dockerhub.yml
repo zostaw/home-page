@@ -5,8 +5,8 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - main
+    types:
+      - closed
 
 jobs:
   tests:
@@ -21,6 +21,16 @@ jobs:
         with:
           submodules: true
           token: ${{ secrets.CI_TOKEN }}
+
+      - name: Check Branch
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # Check if the pull request is from the main branch, other branches should not push to dockerhub
+            if [ "${{ github.event.pull_request.head.ref }}" != "main" ]; then
+              echo "Skipping workflow for pull request from a branch other than main."
+              exit 78
+            fi
+          fi
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
