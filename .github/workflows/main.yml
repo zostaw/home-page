@@ -1,15 +1,12 @@
 name: Dockerhub Release
 
-# Executed on direct push, or after Pull Request was completed.
+# Executed on direct push, or after Pull Request was completed during merge commit to main.
 # It will push the image to Dockerhub.
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    types:
-      - closed
 
 jobs:
   tests:
