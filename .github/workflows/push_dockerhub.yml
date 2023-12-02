@@ -1,5 +1,8 @@
 name: Dockerhub Release
 
+# Executed on direct push, or after Pull Request was completed.
+# It will push the image to Dockerhub.
+
 on:
   push:
     branches:
