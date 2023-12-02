@@ -13,10 +13,10 @@ cert.pem
 key.pem
 docker_rebuild.sh
 notes.txt
-tests/log.html
-tests/output.xml
-tests/report.html
-tests/selenium-screenshot*
+robot_tests/log.html
+robot_tests/output.xml
+robot_tests/report.html
+robot_tests/selenium-screenshot*
 
 
 # below are common python ignore lists
