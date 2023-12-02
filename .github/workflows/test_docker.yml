@@ -20,6 +20,11 @@ jobs:
         run: |
           openssl req -x509 -newkey rsa:4096 -nodes -out app/cert.pem -keyout app/key.pem -days 1 -subj "/C=PL/ST=State/L=/O=/OU=/CN=localhost"
 
+      - name: Verify cert files
+        run: |
+          pwd
+          ls -a
+
       - name: Build and run test web
         run: |
           IMAGE_NAME="zostaw/multiarch-home-page"
