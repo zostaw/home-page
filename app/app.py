@@ -107,6 +107,7 @@ def blog():
             {'name': "Making sense",
              'list':
                 [
+                    {'url': "who_are_we", 'name': "Who are we"}, 
                     {'url': "fear_of_existence", 'name': "Fear of existence"}, 
                     {'url': "dionysiac_architects", 'name': "Dionysiac Architects"}, 
                     {'url': "mystory", 'name': "Childhood aspirations"}, 
