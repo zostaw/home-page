@@ -28,6 +28,37 @@
       </br>
 
       <div class="projects-paragraph">
+        <a href="https://github.com/zostaw/disect-cnn">Disect Convolutional Neural Network <i class="fa fa-github"></i></a> - My CNN learning repository.</br>
+
+        <b>What I learned:</b> </br>
+        - basic architecture of CNN networks - how they work, </br>
+        - representations of CNN and MaxPool layers, </br>
+        - how filter maps are created, </br>
+        - how to extract activations and output gradient with respect to specific layer's outputs, </br>
+        - how to combine them to extract feature maps and heatmaps, </br>
+        - how to visualize and debug CNN model.</br>
+        #NN #CNN #pytorch #CAM</br>
+      </br>
+        <td>
+            <tr>
+                <img id="cnn_heatmaps" src="static/images/cnn_heatmaps.png" style="border-style: solid; border-width: 1px; width:100%;" alt="CNN Heatmaps" onclick="openModal();currentSlide(1)" class="hover-shadow">
+            </tr>
+            <tr>
+                <img id="cnn_featuremaps" src="static/images/cnn_featuremaps.png" style="border-style: solid; border-width: 1px; width:100%;" alt="CNN Feature maps" onclick="openModal();currentSlide(2)" class="hover-shadow">
+            </tr>
+        </td>
+      </div>
+      </br>
+
+      <div class="projects-paragraph">
+        <a href="https://github.com/zostaw/rants_memos">Rants and memos <i class="fa fa-github"></i></a> - simple voice transcription tool based on <a href="https://github.com/openai/whisper">whisper</a> (also <a href="https://github.com/ggerganov/whisper.cpp">whisper.cpp</a> and <a href="https://ffmpeg.org/">ffmpeg</a>) - it has two parts: live transcription to generate markdown note and batched transcription from all Voice Memos.</br>
+
+        <b>What I learned:</b> How to combine multiple applications to solve a problem, building system tools.</br>
+        #voice #whisper #voicememos #ffmpeg</br>
+      </div>
+      </br>
+
+      <div class="projects-paragraph">
         <a href="https://github.com/zostaw/learning_ansible_microk8s">Building microk8s cluster with ansible <i class="fa fa-github"></i></a> - my playbooks for installation of snap, microk8s and forming a k8s cluster from ubuntu/centos servers.</br>
 
         <b>What I learned:</b> the basics of ansible (the structure - inventory, playbooks, roles), as well as some of the important things one should consider when generalizing a process.</br>
@@ -37,16 +68,6 @@
       </div>
       </br>
 
-      <div class="projects-paragraph">
-        <a href="https://github.com/zostaw/ludwig.git">Ludwig <i class="fa fa-github"></i></a> - Ludwig moves in shell. He explores the alleys of paths that are available to him, pondering about existence, searching for a soulmate.</br>
-
-        <b>Why:</b> This is an ongoing project. I'm interested in self-assembling and I want to understand what does it take for a being to self-propagate, to change beyond death - what is continuity of existance. In particular two interpretations on this idea: </br>- to teleport; </br>- to spread and evolve.</br>
-        I want to build intuitions on how does organic life maps onto computers. This is probably cliche topic, but it is fascinating nevertheless.</br>
-        This is inspired by Permutation City, Lee Cronin's Assembly Theory and David Deutsch's takes on simulation-reality relationship and limitations of simulation.
-        I do not delude myself, this is beyond my comprehension, but I think this is important to build intuitions from reality to understand concepts better.</br>
-        #shell #assembly-theory #self-propagation</br>
-      </div>
-      </br>
 
       <div class="projects-paragraph">
         <a href="https://github.com/zostaw/spaced_repetition">Spaced Repetition <i class="fa fa-github"></i></a> - a simple program that implements a spaced repetition tool for learning.<!--, try the demo: <a href="{{ url_for('spaced_repetition') }}">Spaced Repetition</a>--> .</br>
@@ -65,10 +86,10 @@
       </br>
         <td>
             <tr>
-                <img id="beautiful3" src="static/images/beautiful3.png" style="border-style: solid; border-width: 1px; width:49%;"  alt="Beautiful Tree" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                <img id="beautiful3" src="static/images/beautiful3.png" style="border-style: solid; border-width: 1px; width:49%;"  alt="Beautiful Tree" onclick="openModal();currentSlide(3)" class="hover-shadow">
             </tr>
             <tr>
-                <img id="beautiful4" src="static/images/beautiful4.png" style="border-style: solid; border-width: 1px; width:49%;" alt="Even More Beautiful Tree" onclick="openModal();currentSlide(2)" class="hover-shadow">
+                <img id="beautiful4" src="static/images/beautiful4.png" style="border-style: solid; border-width: 1px; width:49%;" alt="Even More Beautiful Tree" onclick="openModal();currentSlide(4)" class="hover-shadow">
             </tr>
         </td>
           <!-- The Modal -->
@@ -83,11 +104,21 @@
             <div class="modal-content">
                 <div class="mySlides">
                   <div class="numbertext">1 / 4</div>
-                  <img src="static/images/beautiful3.png"  style="max-height: 100vh;">
+                  <img src="static/images/cnn_heatmaps.png" style="max-height: 40vh;">
                 </div>
 
                 <div class="mySlides">
                   <div class="numbertext">2 / 4</div>
+                  <img src="static/images/cnn_featuremaps.png" style="max-height: 100vh;">
+                </div>
+
+                <div class="mySlides">
+                  <div class="numbertext">3 / 4</div>
+                  <img src="static/images/beautiful3.png"  style="max-height: 100vh;">
+                </div>
+
+                <div class="mySlides">
+                  <div class="numbertext">4 / 4</div>
                   <img src="static/images/beautiful4.png" style="max-height: 100vh;">
                 </div>
 

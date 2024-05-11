@@ -56,7 +56,7 @@ Or build image yourself:
 IMAGE_NAME="zostaw/multiarch-home-page"
 IMAGE_TAG="latest"
 docker build -t $IMAGE_NAME:$IMAGE_TAG .
-docker compose -d
+docker compose up -d
 ```
 
 ### Kubernetes

@@ -100,6 +100,7 @@ def blog():
             {'name': "Learning",
              'list':
                 [
+                    {'url': "engineers_memoir2", 'name': "Conceptualizing projects"},
                     {'url': "engineers_memoir", 'name': "Becoming an engineer"},
                     {'url': "drawing", 'name': "Learning to draw"},
                 ]
@@ -107,7 +108,7 @@ def blog():
             {'name': "Making sense",
              'list':
                 [
-                    {'url': "who_are_we", 'name': "Who are we"}, 
+                    {'url': "who_are_we", 'name': "Who am I"}, 
                     {'url': "fear_of_existence", 'name': "Fear of existence"}, 
                     {'url': "dionysiac_architects", 'name': "Dionysiac Architects"}, 
                     {'url': "mystory", 'name': "Childhood aspirations"}, 
