@@ -43,7 +43,7 @@ jobs:
           docker run --network=my-network --shm-size=1g -e BROWSER=chrome -v ${PWD}/robot_tests:/opt/robotframework/tests:Z -v $PWD/reports:/opt/robotframework/reports:Z ppodgorsek/robot-framework:latest
 
       - name: Upload test results
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: reports
